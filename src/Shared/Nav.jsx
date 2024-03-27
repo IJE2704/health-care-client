@@ -5,26 +5,30 @@ import { SiGoogleclassroom } from "react-icons/si";
 import { PiExam } from "react-icons/pi";
 import { FaChalkboardTeacher } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../provider/DataProvide";
+import logo from '../assets/logo.png'
 
 const Nav = () => {
-  const { user, selectedMenu, setSelectedMenu } = useContext(Context);
+  const { user, selectedMenu, setSelectedMenu,logOut } = useContext(Context);
+  const navigate = useNavigate();
+  const handleLogout =()=>{
+    navigate('/');
+    logOut()
+  }
   return (
-    <div className="w-full h-screen  shadow-2xl">
+    <div className="w-full h-screen flex flex-col  shadow-2xl">
       <Link to="/">
-        <div className="flex justify-center items-center pt-5">
-          <h1 className="font-bold text-[#D08726] text-4xl 2xl:text-5xl">
-            HEALTH CARE
-          </h1>
+        <div className="flex justify-center items-center pt-5 ">
+          <img className="w-[70px] h-[70px] 2xl:w-[100px] 2xl:h-[100px]" src={logo} alt="" />
         </div>
       </Link>
-      <div className="mt-16 flex flex-col gap-2 pr-4">
+      <div className="mt-10 2xl:mt-16 flex flex-col gap-2 pr-4 flex-1">
         <Link to={`/dashboard/home`}>
           <div
             onClick={() => setSelectedMenu("Dashboard")}
-            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center  gap-4 text-base md:text-xl lg:text-2xl w-full  hover:bg-[#D08726] hover:text-white border py-4 rounded-br-lg rounded-tr-lg ${
-              selectedMenu === "Dashboard" ? "bg-[#D08726] text-white" : ""
+            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center  gap-4 text-base md:text-xl 2xl:text-2xl w-full  hover:bg hover:border-pink-300 border py-4 rounded-br-lg rounded-tr-lg ${
+              selectedMenu === "Dashboard" ? "btn text-white" : ""
             }`}
           >
             <RiDashboardFill /> <h1>Dashboard</h1>
@@ -33,8 +37,8 @@ const Nav = () => {
         <Link to="/dashboard/medicines">
           <div
             onClick={() => setSelectedMenu("Medicines")}
-            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl lg:text-2xl w-full  hover:bg-[#D08726] hover:text-white border py-4 rounded-br-lg rounded-tr-lg ${
-              selectedMenu === "Medicines" ? "bg-[#D08726] text-white" : ""
+            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl 2xl:text-2xl w-full  hover:btn hover:border-pink-300 border py-4 rounded-br-lg rounded-tr-lg ${
+              selectedMenu === "Medicines" ? "btn text-white" : ""
             }`}
           >
             <FaBookOpen /> <h1>Medicines</h1>
@@ -43,8 +47,8 @@ const Nav = () => {
         <Link to="/dashboard/reports">
           <div
             onClick={() => setSelectedMenu("Reports")}
-            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl lg:text-2xl w-full  hover:bg-[#D08726] hover:text-white border py-4 rounded-br-lg rounded-tr-lg ${
-              selectedMenu === "Reports" ? "bg-[#D08726] text-white" : ""
+            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl 2xl:text-2xl w-full  hover:btn hover:border-pink-300 border py-4 rounded-br-lg rounded-tr-lg ${
+              selectedMenu === "Reports" ? "btn text-white" : ""
             }`}
           >
             <SiGoogleclassroom /> <h1>Reports</h1>
@@ -53,8 +57,8 @@ const Nav = () => {
         <Link to="/dashboard/appointments">
           <div
             onClick={() => setSelectedMenu("Appointments")}
-            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl lg:text-2xl w-full  hover:bg-[#D08726] hover:text-white border py-4 rounded-br-lg rounded-tr-lg ${
-              selectedMenu === "Appointments" ? "bg-[#D08726] text-white" : ""
+            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl 2xl:text-2xl w-full  hover:btn hover:border-pink-300 border py-4 rounded-br-lg rounded-tr-lg ${
+              selectedMenu === "Appointments" ? "btn text-white" : ""
             }`}
           >
             <PiExam /> <h1>Appointments</h1>
@@ -63,13 +67,16 @@ const Nav = () => {
         <Link to="/dashboard/plans">
           <div
             onClick={() => setSelectedMenu("Teachers")}
-            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl lg:text-2xl w-full  hover:bg-[#D08726] hover:text-white border py-4 rounded-br-lg rounded-tr-lg ${
-              selectedMenu === "Teachers" ? "bg-[#D08726] text-white" : ""
+            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl 2xl:text-2xl w-full  hover:btn hover:border-pink-300 border py-4 rounded-br-lg rounded-tr-lg ${
+              selectedMenu === "Teachers" ? "btn text-white" : ""
             }`}
           >
             <FaChalkboardTeacher /> <h1>Teachers</h1>
           </div>
         </Link>
+      </div>
+      <div className="flex justify-center  px-16 mb-4">
+        <button onClick={handleLogout} className=" btn text-black py-3 w-full rounded-[10px] hover:scale-105">LogOut</button>
       </div>
     </div>
   );

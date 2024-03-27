@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import healthImg from '../assets/health-img.png'
 
@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { Context } from "../provider/DataProvide";
 
 const LoginPage = () => {
- const {setUser} = useContext(Context);
+ const {setUser, loggedUser,setLoggedUser} = useContext(Context);
  const navigate = useNavigate();
   // const router = useRouter();
   const [formData, setFormData] = useState({
@@ -22,7 +22,7 @@ const LoginPage = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log('first')
+    // console.log('first')
     e.preventDefault();
     try {
       const response = await fetch("https://healthcare-2fif.onrender.com/login", {
@@ -33,7 +33,7 @@ const LoginPage = () => {
         body: JSON.stringify(formData),
       });
       const data = await response.json();
-      console.log(data)
+      // console.log(data)
       if (response.ok) {
         Swal.fire({
           title: "Congratulation!",
@@ -42,7 +42,7 @@ const LoginPage = () => {
         });
         setUser(data);
   
-        navigate('/dashboard')
+        navigate('/dashboard/home')
       } else {
         console.error("Login failed:", data);
         // Handle login failure, show error message, etc.
@@ -51,6 +51,13 @@ const LoginPage = () => {
       console.error("Error logging in:", error);
     }
   };
+  useEffect(()=>{
+    // console.log("login")
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user?.userId){
+      navigate('/dashboard/home')
+    }
+  },[])
 
   return (
     <div className="lg:w-[1100px] lg:h-screen mx-4 lg:mx-auto flex justify-center items-center bg px-5">
