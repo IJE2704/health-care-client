@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CiPillsBottle1 } from "react-icons/ci";
 import { MdBloodtype } from "react-icons/md";
 
 import AddDataModal from "../../../components/AddDataModal";
 import { useDisclosure } from "@chakra-ui/react";
+import { Context } from "../../../provider/DataProvide";
+import { IoMdAdd } from "react-icons/io";
 
 const DashboardPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
+  const { userBloodPressure, userBloodSugar, userBloodO2 } =
+    useContext(Context);
+  console.log(userBloodPressure, userBloodSugar, userBloodO2);
   return (
     <div className="grid grid-cols-4">
       <div className="col-span-3 mr-4 2xl:mr-6">
@@ -21,18 +25,30 @@ const DashboardPage = () => {
                 Blood Oxygen
               </h1>
             </div>
-            <div className="flex justify-between items-center">
-              <div className=" flex justify-center items-center gap-2 mt-4 ">
-                <h1 className=" text-[25px] 2xl:text-[32px] py-0">80 </h1>
-                <polygon className="text-[#818181] text-sm 2xl:text-base">
-                  mg/dl
-                </polygon>
-              </div>
+            {userBloodO2 ? (
+              <>
+                <div className="flex justify-between items-center">
+                  <div className=" flex justify-center items-center gap-2 mt-4 ">
+                    <h1 className=" text-[25px] 2xl:text-[32px] py-0">
+                      {userBloodO2?.bloodO2}
+                    </h1>
+                    <p className="text-[#818181] text-sm 2xl:text-base">
+                      %
+                    </p>
+                  </div>
 
-              <div className="px-2 py-1 flex justify-center items-center bg-[#D6FFDD] rounded">
-                <h1 className="text-xs">Normal</h1>
-              </div>
-            </div>
+                  <div className="px-2 py-1 flex justify-center items-center bg-[#D6FFDD] rounded">
+                    <h1 className="text-xs">Normal</h1>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="text-sm text-center text-red-700 mt-3">
+                  Please update your information
+                </h1>
+              </>
+            )}
           </div>
           <div className=" px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7]">
             <div className="flex justify-center gap-2 items-center">
@@ -43,18 +59,30 @@ const DashboardPage = () => {
                 Blood Sugar
               </h1>
             </div>
-            <div className="flex justify-between items-center">
-              <div className=" flex justify-center items-center gap-2 mt-4 ">
-                <h1 className=" text-[25px] 2xl:text-[32px] py-0">80 </h1>
-                <polygon className="text-[#818181] text-sm 2xl:text-base">
-                  mg/dl
-                </polygon>
-              </div>
+            {userBloodO2 ? (
+              <>
+                <div className="flex justify-between items-center">
+                  <div className=" flex justify-center items-center gap-2 mt-4 ">
+                    <h1 className=" text-[25px] 2xl:text-[32px] py-0">
+                      {userBloodSugar?.bloodSugar}{" "}
+                    </h1>
+                    <p className="text-[#818181] text-sm 2xl:text-base">
+                      mg/dl
+                    </p>
+                  </div>
 
-              <div className="px-2 py-1 flex justify-center items-center bg-[#F8DEBD] rounded">
-                <h1 className="text-xs">Normal</h1>
-              </div>
-            </div>
+                  <div className="px-2 py-1 flex justify-center items-center bg-[#F8DEBD] rounded">
+                    <h1 className="text-xs">Normal</h1>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="text-sm text-center text-red-700 mt-3">
+                  Please update your information
+                </h1>
+              </>
+            )}
           </div>
 
           <div className=" px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7]">
@@ -66,18 +94,30 @@ const DashboardPage = () => {
                 Blood Pressure
               </h1>
             </div>
-            <div className="flex justify-between items-center">
-              <div className=" flex justify-center items-center gap-2 mt-4 ">
-                <h1 className=" text-[25px] 2xl:text-[32px] py-0">102 </h1>
-                <polygon className="text-[#818181] text-sm 2xl:text-base">
-                  / 72 mmgh
-                </polygon>
-              </div>
+            {userBloodO2 ? (
+              <>
+                <div className="flex justify-between items-center">
+                  <div className=" flex justify-center items-center gap-2 mt-4 ">
+                    <h1 className=" text-[25px] 2xl:text-[32px] py-0">
+                      {userBloodPressure?.bloodHighPressure}{" "}
+                    </h1>
+                    <p className="text-[#818181] text-sm 2xl:text-base">
+                      / {userBloodPressure?.bloodLowPressure} mmgh
+                    </p>
+                  </div>
 
-              <div className="px-2 py-1 flex justify-center items-center bg-[#D0fbff] rounded">
-                <h1 className="text-xs">Normal</h1>
-              </div>
-            </div>
+                  <div className="px-2 py-1 flex justify-center items-center bg-[#D0fbff] rounded">
+                    <h1 className="text-xs">Normal</h1>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h1 className="text-sm text-center text-red-700 mt-3">
+                  Please update your information
+                </h1>
+              </>
+            )}
           </div>
         </div>
         <div className="bg-white h-[100px] rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
@@ -124,16 +164,20 @@ const DashboardPage = () => {
           </div>
         </div>
 
-        <div className="flex-1 flex w-full justify-center items-end mb-4">
+        <div className=" h-[100px] 2xl:h-[300px] flex w-full justify-center items-end mb-4">
           <button
             onClick={onOpen}
-            className=" btn text-black py-3 w-full rounded-[10px] hover:scale-105"
+            className=" btn flex justify-center items-center gap-3 text-black py-3 w-full rounded-[10px] font-semibold hover:scale-105"
           >
-            Update
+            <p>Update</p> <IoMdAdd></IoMdAdd>
           </button>
         </div>
       </div>
-      <AddDataModal isOpen={isOpen} onOpen={onOpen} onClose={onclose}></AddDataModal>
+      <AddDataModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      ></AddDataModal>
     </div>
   );
 };

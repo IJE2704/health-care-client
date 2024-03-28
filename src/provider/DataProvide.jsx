@@ -5,7 +5,52 @@ export const Context = createContext()
 const DataProvide = ({children}) => {
   const [selectedMenu,setMenu] = useState("");
   const [loggedUser,setLoggedUser] = useState({})
+  const [date, setDate] = useState("");
+  const [userBloodO2Data,setUserBloodO2Data] = useState({});
+  const [userBloodSugarData,setUserBloodSugarData] = useState({});
+  const [userBloodPressureData,setUserBloodPressureData] = useState({});
+  const [userBloodO2,setUserBloodO2] = useState(null);
+  const [userBloodSugar,setUserBloodSugar] = useState({});
+  const [userBloodPressure,setUserBloodPressure] = useState({});
+  const [update,setUpdate] = useState(0);
   
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const o2Response = await fetch(`https://healthcare-2fif.onrender.com/o2/${loggedUser?.userId}`);
+        const o2Data = await o2Response.json();
+        const lastO2Data = o2Data[o2Data.length - 1];
+        setUserBloodO2(lastO2Data);
+        console.log(lastO2Data)
+        setUserBloodO2Data(o2Data);
+  
+        const glucoseResponse = await fetch(`https://healthcare-2fif.onrender.com/glucose/${loggedUser?.userId}`);
+        const glucoseData = await glucoseResponse.json();
+        const lastGlucoseData = glucoseData[glucoseData.length - 1];
+        setUserBloodSugar(lastGlucoseData);
+        setUserBloodSugarData(glucoseData);
+  
+        const pressureResponse = await fetch(`https://healthcare-2fif.onrender.com/pressure/${loggedUser?.userId}`);
+        const pressureData = await pressureResponse.json();
+        const lastPressureData = pressureData[pressureData.length - 1];
+        setUserBloodPressure(lastPressureData);
+        setUserBloodPressureData(pressureData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle error state or alert user
+      }
+    };
+  
+    if (loggedUser?.userId) {
+      fetchData();
+    }
+  }, [loggedUser,update]);
+  
+useEffect(()=>{
+  console.log(userBloodO2)
+},[userBloodO2])
 
 
   const setUser = (user) => {
@@ -48,6 +93,18 @@ const DataProvide = ({children}) => {
     selectedMenu,
     loggedUser,
     logOut,
+    date,
+    setDate,
+    userBloodO2Data,
+    setUserBloodO2Data,
+    userBloodSugarData,setUserBloodSugarData,
+    userBloodPressureData,
+    setUserBloodPressureData,
+    userBloodPressure,
+    userBloodSugar,
+    userBloodO2,
+    setUpdate,
+    update
   }
 
 

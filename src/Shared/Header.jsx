@@ -3,8 +3,8 @@ import { Context } from "../provider/DataProvide";
 import { CiBellOn } from "react-icons/ci";
 
 const Header = () => {
-  const { loggedUser, selectedMenu } = useContext(Context);
-  const [date, setDate] = useState("");
+  const { loggedUser, selectedMenu,date,setDate } = useContext(Context);
+  
   const [header, setHeader] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const handleSearchChange = (event) => {
@@ -28,7 +28,7 @@ const Header = () => {
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Adding 1 because getMonth() returns zero-based month index
     const day = String(currentDate.getDate()).padStart(2, "0");
-    const formattedDate = `${year}-${month}-${day}`;
+    const formattedDate = `${day}-${month}-${year}`;
     setDate(formattedDate);
   }, []);
   return (

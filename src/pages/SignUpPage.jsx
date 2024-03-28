@@ -55,14 +55,15 @@ const SignUpPage = () => {
         const data = await response.json();
         console.log(data);
         if (response.ok) {
+          console.log("first")
           Swal.fire({
             title: "Congratulation!",
             text: "Successfully Login",
             icon: "success",
           });
-          setUser(data);
+          setUser(data.user);
 
-          navigate("/dashboard");
+          navigate("/dashboard/home");
         } else {
           console.error("Login failed:", data);
           // Handle login failure, show error message, etc.
@@ -72,6 +73,8 @@ const SignUpPage = () => {
       }
     } catch (error) {
       console.error("Error logging in:", error);
+      console.log(error.message)
+      setError({message:"User already exist"})
     }
   };
 
@@ -235,11 +238,11 @@ const SignUpPage = () => {
                 <label htmlFor="female">Female</label>
               </div>
             </div>
-            {error.message && (
+            {error?.message && (
               <>
                 <div>
                   <p className="text-center text-red-700 mb-2">
-                    {error.message}
+                    {error?.message}
                   </p>
                 </div>
               </>
@@ -248,13 +251,13 @@ const SignUpPage = () => {
               type="submit"
               className="w-full bg-[#ed4286] text-white py-2 px-4 rounded-md hover:bg-[#c24977] transition duration-300"
             >
-              Login
+              Sign Up
             </button>
           </form>
           <p className="text-center mt-4 mb-4">
-            Don't have an account?{" "}
+            Already have an account?{" "}
             <Link to="/">
-              <span className="text-[#ed4286]">Sign up</span>
+              <span className="text-[#ed4286]">Login</span>
             </Link>
           </p>
         </div>

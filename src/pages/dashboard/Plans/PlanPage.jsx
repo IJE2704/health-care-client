@@ -3,7 +3,7 @@ import React from 'react';
 const PlanPage = () => {
   return (
     <div>
-      <h1>plane</h1>
+      <h1>Tips</h1>
     </div>
   );
 };

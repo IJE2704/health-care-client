@@ -7,6 +7,10 @@ import { FaChalkboardTeacher } from "react-icons/fa";
 
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../provider/DataProvide";
+import { GiMedicines } from "react-icons/gi";
+import { TbReportSearch } from "react-icons/tb";
+import { FaUserDoctor } from "react-icons/fa6";
+import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import logo from '../assets/logo.png'
 
 const Nav = () => {
@@ -31,7 +35,7 @@ const Nav = () => {
               selectedMenu === "Dashboard" ? "btn text-white" : ""
             }`}
           >
-            <RiDashboardFill /> <h1>Dashboard</h1>
+            <RiDashboardFill className="text-pink-700" /> <h1>Dashboard</h1>
           </div>
         </Link>
         <Link to="/dashboard/medicines">
@@ -41,7 +45,7 @@ const Nav = () => {
               selectedMenu === "Medicines" ? "btn text-white" : ""
             }`}
           >
-            <FaBookOpen /> <h1>Medicines</h1>
+            <GiMedicines className="text-pink-700" /> <h1>Medicines</h1>
           </div>
         </Link>
         <Link to="/dashboard/reports">
@@ -51,7 +55,7 @@ const Nav = () => {
               selectedMenu === "Reports" ? "btn text-white" : ""
             }`}
           >
-            <SiGoogleclassroom /> <h1>Reports</h1>
+            <TbReportSearch className="text-pink-700" /> <h1>Reports</h1>
           </div>
         </Link>
         <Link to="/dashboard/appointments">
@@ -61,7 +65,7 @@ const Nav = () => {
               selectedMenu === "Appointments" ? "btn text-white" : ""
             }`}
           >
-            <PiExam /> <h1>Appointments</h1>
+            <FaUserDoctor className="text-pink-700" /> <h1>Appointments</h1>
           </div>
         </Link>
         <Link to="/dashboard/plans">
@@ -71,7 +75,7 @@ const Nav = () => {
               selectedMenu === "Teachers" ? "btn text-white" : ""
             }`}
           >
-            <FaChalkboardTeacher /> <h1>Teachers</h1>
+            <MdOutlineTipsAndUpdates className="text-pink-700" /> <h1>Tips</h1>
           </div>
         </Link>
       </div>
