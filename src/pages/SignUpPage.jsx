@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { Context } from "../provider/DataProvide";
 
 const SignUpPage = () => {
-  const { setUser } = useContext(Context);
+  const { setUser,setSelectedMenu } = useContext(Context);
   const navigate = useNavigate();
   const [error, setError] = useState({});
   // const router = useRouter();
@@ -62,7 +62,7 @@ const SignUpPage = () => {
             icon: "success",
           });
           setUser(data.user);
-
+          setSelectedMenu("Dashboard")
           navigate("/dashboard/home");
         } else {
           console.error("Login failed:", data);

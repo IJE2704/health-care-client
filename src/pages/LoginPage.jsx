@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { Context } from "../provider/DataProvide";
 
 const LoginPage = () => {
- const {setUser, loggedUser,setLoggedUser} = useContext(Context);
+ const {setUser, loggedUser,setLoggedUser,setSelectedMenu} = useContext(Context);
  const navigate = useNavigate();
   // const router = useRouter();
   const [formData, setFormData] = useState({
@@ -41,7 +41,7 @@ const LoginPage = () => {
           icon: "success",
         });
         setUser(data);
-  
+        setSelectedMenu("Dashboard")
         navigate('/dashboard/home')
       } else {
         console.error("Login failed:", data);
@@ -51,13 +51,13 @@ const LoginPage = () => {
       console.error("Error logging in:", error);
     }
   };
-  useEffect(()=>{
-    // console.log("login")
-    const user = JSON.parse(localStorage.getItem('user'));
-    if(user?.userId){
-      navigate('/dashboard/home')
-    }
-  },[])
+  // useEffect(()=>{
+  //   // console.log("login")
+  //   const user = JSON.parse(localStorage.getItem('user'));
+  //   if(user?.userId){
+  //     navigate('/dashboard/home')
+  //   }
+  // },[])
 
   return (
     <div className="lg:w-[1100px] lg:h-screen mx-4 lg:mx-auto flex justify-center items-center bg px-5">

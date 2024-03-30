@@ -9,9 +9,9 @@ import { IoMdAdd } from "react-icons/io";
 
 const DashboardPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { userBloodPressure, userBloodSugar, userBloodO2 } =
+  const { userBloodPressure, userBloodSugar, userBloodO2, userMeasurements } =
     useContext(Context);
-  console.log(userBloodPressure, userBloodSugar, userBloodO2);
+  console.log(userBloodPressure, userBloodSugar, userBloodO2, userMeasurements);
   return (
     <div className="grid grid-cols-4">
       <div className="col-span-3 mr-4 2xl:mr-6">
@@ -32,13 +32,17 @@ const DashboardPage = () => {
                     <h1 className=" text-[25px] 2xl:text-[32px] py-0">
                       {userBloodO2?.bloodO2}
                     </h1>
-                    <p className="text-[#818181] text-sm 2xl:text-base">
-                      %
-                    </p>
+                    <p className="text-[#818181] text-sm 2xl:text-base">%</p>
                   </div>
 
-                  <div className="px-2 py-1 flex justify-center items-center bg-[#D6FFDD] rounded">
-                    <h1 className="text-xs">Normal</h1>
+                  <div
+                    className={`px-2 py-1 flex justify-center items-center ${
+                      userBloodO2?.condition === "Normal"
+                        ? "bg-[#D6FFDD]"
+                        : "bg-red-600 text-white"
+                    } rounded`}
+                  >
+                    <h1 className="text-xs">{userBloodO2?.condition}</h1>
                   </div>
                 </div>
               </>
@@ -59,7 +63,7 @@ const DashboardPage = () => {
                 Blood Sugar
               </h1>
             </div>
-            {userBloodO2 ? (
+            {userBloodSugar ? (
               <>
                 <div className="flex justify-between items-center">
                   <div className=" flex justify-center items-center gap-2 mt-4 ">
@@ -71,8 +75,14 @@ const DashboardPage = () => {
                     </p>
                   </div>
 
-                  <div className="px-2 py-1 flex justify-center items-center bg-[#F8DEBD] rounded">
-                    <h1 className="text-xs">Normal</h1>
+                  <div
+                    className={`px-2 py-1 flex justify-center items-center ${
+                      userBloodSugar?.condition === "Normal"
+                        ? "bg-[#F8DEBD]"
+                        : "bg-red-600 text-white"
+                    } rounded`}
+                  >
+                    <h1 className="text-xs">{userBloodSugar.condition}</h1>
                   </div>
                 </div>
               </>
@@ -94,7 +104,7 @@ const DashboardPage = () => {
                 Blood Pressure
               </h1>
             </div>
-            {userBloodO2 ? (
+            {userBloodPressure ? (
               <>
                 <div className="flex justify-between items-center">
                   <div className=" flex justify-center items-center gap-2 mt-4 ">
@@ -106,8 +116,14 @@ const DashboardPage = () => {
                     </p>
                   </div>
 
-                  <div className="px-2 py-1 flex justify-center items-center bg-[#D0fbff] rounded">
-                    <h1 className="text-xs">Normal</h1>
+                  <div
+                    className={`px-2 py-1 flex justify-center items-center ${
+                      userBloodPressure?.condition === "Normal"
+                        ? "bg-[#D0fbff]"
+                        : "bg-red-600 text-white"
+                    } rounded`}
+                  >
+                    <h1 className="text-xs">{userBloodPressure.condition}</h1>
                   </div>
                 </div>
               </>
@@ -139,11 +155,27 @@ const DashboardPage = () => {
             <div className=" flex flex-col gap-3 mt-5">
               <div className="flex justify-between items-center bg-[#F8DEBD] rounded-xl 2xl:px-5 2xl:py-6 px-4 py-5">
                 <p className="text-black text-sm 2xl:text-base">Height </p>
-                <p className="text-black text-sm 2xl:text-base">5.5 inch</p>
+                {userMeasurements?.height ? (
+                  <p className="text-black text-sm 2xl:text-base">
+                    {userMeasurements?.height} ft
+                  </p>
+                ) : (
+                  <h1 className="text-sm text-center text-red-700 mt-3">
+                    No Data
+                  </h1>
+                )}
               </div>
               <div className="flex justify-between items-center bg-[#D0FBFF] rounded-xl 2xl:px-5 2xl:py-6 px-4 py-5">
                 <p className="text-black text-sm 2xl:text-base">Weight </p>
-                <p className="text-black text-sm 2xl:text-base">72kg</p>
+                {userMeasurements?.weight ? (
+                  <p className="text-black text-sm 2xl:text-base">
+                    {userMeasurements?.weight} kg
+                  </p>
+                ) : (
+                  <h1 className="text-sm text-center text-red-700 mt-3">
+                    No Data
+                  </h1>
+                )}
               </div>
 
               <div className=" bg-[#4A4949] rounded-xl 2xl:px-5 2xl:py-6 px-4 py-5">
@@ -153,10 +185,18 @@ const DashboardPage = () => {
 
                 <div className="flex justify-between items-center mt-5">
                   <div>
-                    <h1 className="text-white text-sm">24.5</h1>
+                    {userMeasurements?.bmi ? (
+                      <h1 className="text-white text-sm">
+                        {userMeasurements?.bmi}
+                      </h1>
+                    ) : (
+                      <h1 className="text-sm text-center text-red-700 mt-3">
+                        No Data
+                      </h1>
+                    )}
                   </div>
-                  <div className="px-2 py-1 flex justify-center items-center bg-[#D6FFDD] rounded">
-                    <h1 className="text-xs">You are healthy</h1>
+                  <div className={`px-2 py-1 flex justify-center items-center ${userMeasurements?.condition ==="Healthy" ?"bg-[#D6FFDD]":"bg-red-600 text-white"}  rounded`}>
+                    <h1 className="text-xs">You are {userMeasurements?.condition}</h1>
                   </div>
                 </div>
               </div>

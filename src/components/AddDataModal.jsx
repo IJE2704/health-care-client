@@ -159,10 +159,62 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
     }
   };
 
-  const handleMesurementsSubmit = (e) => {
+  const handleMesurementsSubmit = async (e) => {
     console.log("2nd");
     e.preventDefault();
     console.log(mesureMentsFormData);
+
+    if (mesureMentsFormData.height && mesureMentsFormData.weight) {
+      const newMeasurementsData = {
+        userId: loggedUser.userId,
+        height: mesureMentsFormData.height,
+        weight: mesureMentsFormData.weight,
+        date: date,
+      };
+      // console.log(newBloodSugarData)
+      try {
+        const response = await fetch(
+          "https://healthcare-2fif.onrender.com/addmeasurements",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newMeasurementsData),
+          }
+        );
+        const data = await response.json();
+        console.log(data);
+        if (data.acknowledged) {
+          onClose();
+          console.log("updated");
+          setUpdate(update + 1);
+          Swal.fire({
+            title: "Good Job!",
+            text: "Successfully Measurements information added.",
+            icon: "success",
+          });
+          setMesureMentsFormData({
+            height: "",
+            weight: "",
+            
+          });
+        }
+        else{
+          Swal.fire({
+            title: "Sorry!",
+            text: "Something is wrong.",
+            icon: "error",
+          });
+          setMesureMentsFormData({
+            height: "",
+            weight: "",
+            
+          });
+        }
+        // console.log(data)
+      } catch (error) {}
+    }
   };
   return (
     <div>
@@ -291,10 +343,10 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="weight"
                           name="weight"
-                          type="number"
+                          type="text"
                           placeholder="Enter weight"
                           value={mesureMentsFormData.weight}
-                          onChange={handleBloodChange}
+                          onChange={handlMesurementChange}
                         />
                       </div>
                       <div>
@@ -308,7 +360,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="height"
                           name="height"
-                          type="number"
+                          type="text"
                           placeholder="Enter height"
                           value={mesureMentsFormData.height}
                           onChange={handlMesurementChange}
