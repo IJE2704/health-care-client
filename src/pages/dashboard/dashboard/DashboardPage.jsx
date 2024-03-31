@@ -13,7 +13,7 @@ const DashboardPage = () => {
     useContext(Context);
   console.log(userBloodPressure, userBloodSugar, userBloodO2, userMeasurements);
   return (
-    <div className="grid grid-cols-4">
+    <div className="grid grid-cols-4 relative w-full h-full">
       <div className="col-span-3 mr-4 2xl:mr-6">
         <div className="grid grid-cols-3 gap-4">
           <div className=" px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7]">
@@ -147,7 +147,7 @@ const DashboardPage = () => {
       </div>
       <div className="col-span-1 flex flex-col mr-3">
         <div className="">
-          <div className="w-full bg-black rounded-xl p-3 py-7 2xl:py-5 2xl:p-5">
+          <div className="w-full bg-black rounded-xl p-3 py-7 2xl:py-5 2xl:p-5 shadow-xl">
             <h1 className="text-white text-lg 2xl:text-[22px] ">
               BMI Calculator
             </h1>
@@ -195,22 +195,21 @@ const DashboardPage = () => {
                       </h1>
                     )}
                   </div>
-                  <div className={`px-2 py-1 flex justify-center items-center ${userMeasurements?.condition ==="Healthy" ?"bg-[#D6FFDD]":"bg-red-600 text-white"}  rounded`}>
-                    <h1 className="text-xs">You are {userMeasurements?.condition}</h1>
+                  <div
+                    className={`px-2 py-1 flex justify-center items-center ${
+                      userMeasurements?.condition === "Healthy"
+                        ? "bg-[#D6FFDD]"
+                        : "bg-red-600 text-white"
+                    }  rounded`}
+                  >
+                    <h1 className="text-xs">
+                      You are {userMeasurements?.condition}
+                    </h1>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-        <div className=" h-[100px] 2xl:h-[300px] flex w-full justify-center items-end mb-4">
-          <button
-            onClick={onOpen}
-            className=" btn flex justify-center items-center gap-3 text-black py-3 w-full rounded-[10px] font-semibold hover:scale-105"
-          >
-            <p>Update</p> <IoMdAdd></IoMdAdd>
-          </button>
         </div>
       </div>
       <AddDataModal
@@ -218,6 +217,16 @@ const DashboardPage = () => {
         onOpen={onOpen}
         onClose={onClose}
       ></AddDataModal>
+      <div className="absolute w-[200px] bottom-0 right-0 mr-5 2xl:mr-16"> 
+        <div className="flex w-full justify-center items-end mb-4 mt-8">
+          <button
+            onClick={onOpen}
+            className=" btn flex justify-center items-center gap-3 text-black py-3 w-full px-2 rounded-[10px] font-semibold hover:scale-105"
+          >
+            <p>Update</p> <IoMdAdd></IoMdAdd>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

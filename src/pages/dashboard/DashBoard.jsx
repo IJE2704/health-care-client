@@ -10,11 +10,11 @@ const DashBoard = () => {
         <Nav></Nav>
       </div>
       <div className="col-span-4 mt-7 2xl:mt-14 ml-8 2xl:ml-10">
-        <div className="grid grid-rows-7 gap-5 2xl:gap-10">
+        <div className="grid grid-rows-7 2xl:grid-rows-8 gap-5 2xl:gap-10">
           <div className="row-span-1">
             <Header></Header>
           </div>
-          <div className="row-span-6">
+          <div className=" row-span-6 2xl:row-span-7">
             <Outlet></Outlet>
           </div>
         </div>

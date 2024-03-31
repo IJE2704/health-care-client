@@ -14,7 +14,9 @@ const DataProvide = ({ children }) => {
   const [userBloodSugar, setUserBloodSugar] = useState({});
   const [userBloodPressure, setUserBloodPressure] = useState({});
   const [userMeasurements, setUserMeasurements] = useState({});
+  const [userMedicines,setUserMedicines] = useState({})
   const [update, setUpdate] = useState(0);
+  const [updateMedicines,setUpdateMedicines] = useState(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,9 +65,27 @@ const DataProvide = ({ children }) => {
     }
   }, [loggedUser, update]);
 
+
+  
   useEffect(() => {
-    console.log(userMeasurements);
-  }, [userMeasurements]);
+    const fetchData = async () => {
+      try {
+        const medicinesResponse = await fetch(
+          `https://healthcare-2fif.onrender.com/medicine/${loggedUser?.userId}`
+        );
+        const medicinesData = await medicinesResponse.json();
+        console.log(medicinesData)
+        setUserMedicines(medicinesData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle error state or alert user
+      }
+    };
+
+    if (loggedUser?.userId) {
+      fetchData();
+    }
+  }, [loggedUser, updateMedicines]);
 
   const setUser = (user) => {
     localStorage.setItem("user", JSON.stringify(user));
@@ -112,6 +132,9 @@ const DataProvide = ({ children }) => {
     update,
     userMeasurements,
     userMeasuremnetsData,
+    setUpdateMedicines,
+    updateMedicines,userMedicines
+
   };
 
   return <Context.Provider value={info}>{children}</Context.Provider>;

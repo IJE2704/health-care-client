@@ -315,7 +315,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
                     </div>
                     <div className="flex items-center justify-center">
                       <button
-                        className="btn text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="btn text-black font-bold py-2 px-4 hover:scale-105 rounded focus:outline-none focus:shadow-outline"
                         type="submit"
                       >
                         Update Levels
@@ -371,7 +371,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
 
                     <div className="flex items-center justify-center">
                       <button
-                        className="btn text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        className="btn text-black font-bold py-2 px-4 hover:scale-105 rounded focus:outline-none focus:shadow-outline"
                         type="submit"
                       >
                         Update
