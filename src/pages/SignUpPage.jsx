@@ -79,8 +79,13 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="lg:w-[1100px] lg:h-screen mx-4 lg:mx-auto flex justify-center items-center bg px-5">
-      <div className="w-full flex flex-col lg:flex-row justify-between   rounded">
+    <div className="h-screen mx-4 lg:mx-auto flex flex-col justify-center items-center bg p-10">
+      <h1 className="text-center text-5xl font-bold text-[#ed4286] pt-10 2xl:pt-16">
+        Health Care
+      </h1>
+      <p className="text-center text-lg mt-4">Stay with us, stay healthy</p>
+      <p className="text-center text-lg">Live your life long with happiness</p>
+      <div className="w-[1100px] flex flex-col lg:flex-row justify-between   rounded mt-16">
         <div className="lg:w-1/2 h-full flex justify-between items-center rounded">
           <div className="lg:w-[80%] h-full flex justify-between items-center mx-auto">
             <img src={healthImg} alt="sign up"></img>

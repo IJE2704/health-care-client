@@ -15,6 +15,9 @@ import ReportsPage from "./pages/dashboard/Reports/ReportsPage.jsx";
 import AppointmentsPage from "./pages/dashboard/Appointments.jsx/AppointmentsPage.jsx";
 import PlanPage from "./pages/dashboard/Plans/PlanPage.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -57,7 +60,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider>
       <DataProvide>
-        <RouterProvider router={router} />
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
       </DataProvide>
     </ChakraProvider>
   </React.StrictMode>

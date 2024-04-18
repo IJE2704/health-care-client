@@ -21,3 +21,8 @@ body{
 .border_color{
   border-color: linear-gradient(106deg, rgba(255, 190, 189, 0.70) 12.31%, rgba(255, 131, 182, 0.70) 100%);
 }
+
+.bg-btn{
+  border-radius: 7px 0 0 7px;
+  background: linear-gradient(106deg, rgba(255, 190, 189, 0.70) 12.31%, rgba(255, 131, 182, 0.70) 100%);
+}

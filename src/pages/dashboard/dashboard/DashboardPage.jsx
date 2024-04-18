@@ -9,9 +9,22 @@ import { IoMdAdd } from "react-icons/io";
 
 const DashboardPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { userBloodPressure, userBloodSugar, userBloodO2, userMeasurements } =
-    useContext(Context);
-  console.log(userBloodPressure, userBloodSugar, userBloodO2, userMeasurements);
+
+  const {
+    userBloodPressure,
+    userBloodSugar,
+    userBloodO2,
+    userMeasurements,
+    userMedicines,
+    morningMedicines,
+    noonMedicines,
+    nightMedicines,
+    closeAppointMent,
+  } = useContext(Context);
+
+  console.log(closeAppointMent);
+  // console.log(userBloodPressure, userBloodSugar, userBloodO2, userMeasurements);
+  // console.log(userMedicines)
   return (
     <div className="grid grid-cols-4 relative w-full h-full">
       <div className="col-span-3 mr-4 2xl:mr-6">
@@ -136,13 +149,127 @@ const DashboardPage = () => {
             )}
           </div>
         </div>
-        <div className="bg-white h-[100px] rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
-          <h1 className="text-center font-bold text-xl 2xl:text-2xl mt-2">
+        <div className="bg-white min-h-[100px] rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
+          <h1 className="text-center font-bold text-xl 2xl:text-2xl my-5">
             Medicines
           </h1>
+          <div>
+            {userMedicines.length === 0 ? (
+              <>
+                <h1 className="text-center text-xl font-semibold my-8 text-red-500 ">
+                  You dont have any medicines
+                </h1>
+              </>
+            ) : (
+              <>
+                <div className="grid grid-cols-3 ">
+                  <div className="col-span-1 border-r border-r-pink-500">
+                    <div className="flex justify-center items-center border-b  bg-[#D6FFDD]">
+                      <h1 className="text-center font-medium  py-2">Morning</h1>
+                    </div>
+                    <div className="p-5">
+                      {morningMedicines?.map((medicine) => (
+                        <div
+                          key={medicine._id}
+                          className="flex justify-between items-center"
+                        >
+                          <h1 className="text-base 2xl:text-xl font-medium italic">
+                            {medicine.name}
+                          </h1>
+                          <h1 className="text-xs 2xl:text-sm">
+                            {medicine.meal}
+                          </h1>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="col-span-1 border-r border-r-pink-500">
+                    <div className="flex justify-center items-center border-b  bg-[#F8DEBD]">
+                      <h1 className="text-center font-medium  py-2">Noon</h1>
+                    </div>
+                    <div className="p-5">
+                      {noonMedicines?.map((medicine) => (
+                        <div
+                          key={medicine._id}
+                          className="flex justify-between items-center"
+                        >
+                          <h1 className="text-base 2xl:text-xl font-medium italic">
+                            {medicine.name}
+                          </h1>
+                          <h1 className="text-xs 2xl:text-sm">
+                            {medicine.meal}
+                          </h1>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="col-span-1 border-r ">
+                  <div className="flex justify-center items-center border-b  bg-[#D0fbff]">
+                      <h1 className="text-center font-medium  py-2">Night</h1>
+                    </div>
+                    <div className="p-5">
+                      {nightMedicines?.map((medicine) => (
+                        <div
+                          key={medicine._id}
+                          className="flex justify-between items-center"
+                        >
+                          <h1 className="text-base 2xl:text-xl font-medium italic">
+                            {medicine.name}
+                          </h1>
+                          <h1 className="text-xs 2xl:text-sm">
+                            {medicine.meal}
+                          </h1>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
         </div>
         <div className="bg-white p-6 rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
-          <h1>Appointments</h1>
+          <h1 className="text-center font-bold text-green-600">
+            Upcoming Appointment
+          </h1>
+
+          {closeAppointMent ? (
+            <>
+              <div className="grid grid-cols-5 mt-5">
+                <div className="col-span-1 flex justify-center items-center">
+                  <p className="text-xl font-bold">
+                    For {closeAppointMent.reason}
+                  </p>
+                </div>
+                <div className="col-span-1 flex justify-center items-center">
+                  <p className="text-base font-medium italic">
+                    with {closeAppointMent.name}
+                  </p>
+                </div>
+                <div className="col-span-1 flex justify-center items-center">
+                  <p className="text-base  italic">
+                    in {closeAppointMent.location}
+                  </p>
+                </div>
+                <div className="col-span-1 flex justify-center items-center">
+                  <p className="text-base font-bold italic">
+                    at {closeAppointMent.time}
+                  </p>
+                </div>
+                <div className="col-span-1 flex justify-center items-center">
+                  <p className="text-base font-bold italic">
+                    on {closeAppointMent.date}
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <h1 className="text-center text-xl font-semibold my-8 text-red-500 ">
+                You dont have any appointment
+              </h1>
+            </>
+          )}
         </div>
       </div>
       <div className="col-span-1 flex flex-col mr-3">
@@ -169,7 +296,7 @@ const DashboardPage = () => {
                 <p className="text-black text-sm 2xl:text-base">Weight </p>
                 {userMeasurements?.weight ? (
                   <p className="text-black text-sm 2xl:text-base">
-                    {userMeasurements?.weight} kg                    
+                    {userMeasurements?.weight} kg
                   </p>
                 ) : (
                   <h1 className="text-sm text-center text-red-700 mt-3">
@@ -217,7 +344,7 @@ const DashboardPage = () => {
         onOpen={onOpen}
         onClose={onClose}
       ></AddDataModal>
-      <div className="absolute w-[200px] bottom-0 right-0 mr-5 2xl:mr-16"> 
+      <div className="absolute w-[200px] bottom-0 right-0 mr-5 2xl:mr-16">
         <div className="flex w-full justify-center items-end mb-4 mt-8">
           <button
             onClick={onOpen}

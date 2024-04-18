@@ -14,9 +14,17 @@ const DataProvide = ({ children }) => {
   const [userBloodSugar, setUserBloodSugar] = useState({});
   const [userBloodPressure, setUserBloodPressure] = useState({});
   const [userMeasurements, setUserMeasurements] = useState({});
-  const [userMedicines,setUserMedicines] = useState({})
+  const [userMedicines, setUserMedicines] = useState([]);
+  const [userAppointments, setUserAppointMents] = useState([]);
+  const [closeAppointMent,setCloseAppointment] = useState({})
+  const [userReports,setuserReports] = useState([]);
   const [update, setUpdate] = useState(0);
-  const [updateMedicines,setUpdateMedicines] = useState(0)
+  const [updateMedicines, setUpdateMedicines] = useState(0);
+  const [updateAppointments, setUpdateAppointments] = useState(0);
+  const [updateReports, setUpdateReports] = useState(0);
+  const [morningMedicines, setMorningMedicines] = useState([]);
+  const [noonMedicines, setNoonMedicines] = useState([]);
+  const [nightMedicines, setNightMedicines] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +35,7 @@ const DataProvide = ({ children }) => {
         const o2Data = await o2Response.json();
         const lastO2Data = o2Data[o2Data.length - 1];
         setUserBloodO2(lastO2Data);
-        console.log(lastO2Data);
+        // console.log(lastO2Data);
         setUserBloodO2Data(o2Data);
 
         const glucoseResponse = await fetch(
@@ -65,8 +73,6 @@ const DataProvide = ({ children }) => {
     }
   }, [loggedUser, update]);
 
-
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -74,7 +80,7 @@ const DataProvide = ({ children }) => {
           `https://healthcare-2fif.onrender.com/medicine/${loggedUser?.userId}`
         );
         const medicinesData = await medicinesResponse.json();
-        console.log(medicinesData)
+        // console.log(medicinesData)
         setUserMedicines(medicinesData);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -86,6 +92,94 @@ const DataProvide = ({ children }) => {
       fetchData();
     }
   }, [loggedUser, updateMedicines]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const appointmentsResponse = await fetch(
+          `https://healthcare-2fif.onrender.com/appointment/${loggedUser?.userId}`
+        );
+        const appointMentsData = await appointmentsResponse.json();
+        console.log(appointMentsData);
+        
+        
+
+        // Sort the data based on date and time
+        appointMentsData.sort((a, b) => {
+          // Compare dates first
+          const dateComparison = new Date(a.date) - new Date(b.date);
+          if (dateComparison !== 0) {
+            return dateComparison;
+          }
+
+          // If dates are equal, compare times
+          const timeA = a.time.split(":");
+          const timeB = b.time.split(":");
+
+          const hourComparison = parseInt(timeA[0]) - parseInt(timeB[0]);
+          if (hourComparison !== 0) {
+            return hourComparison;
+          }
+
+          const minuteComparison = parseInt(timeA[1]) - parseInt(timeB[1]);
+          return minuteComparison;
+        });
+        setUserAppointMents(appointMentsData);
+        setCloseAppointment(appointMentsData[0])
+        // Print sorted data
+        console.log(appointMentsData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle error state or alert user
+      }
+    };
+
+    if (loggedUser?.userId) {
+      fetchData();
+    }
+  }, [loggedUser, updateAppointments]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const reportsResponse = await fetch(
+          `https://healthcare-2fif.onrender.com/report/${loggedUser?.userId}`
+        );
+        const reportsData = await reportsResponse.json();
+        console.log(reportsData);
+        
+        
+
+        
+      
+        setuserReports(reportsData);
+        
+        // Print sorted data
+        console.log(reportsData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        // Handle error state or alert user
+      }
+    };
+
+    if (loggedUser?.userId) {
+      fetchData();
+    }
+  }, [loggedUser, updateReports]);
+
+  useEffect(() => {
+    const morning = userMedicines?.filter(
+      (medicine) => medicine.morning === true
+    );
+    setMorningMedicines(morning);
+    // console.log(morning)
+    const noon = userMedicines?.filter((medicine) => medicine.noon === true);
+    setNoonMedicines(noon);
+    // console.log(noon)
+    const night = userMedicines?.filter((medicine) => medicine.night === true);
+    setNightMedicines(night);
+    // console.log(night)
+  }, [userMedicines]);
 
   const setUser = (user) => {
     localStorage.setItem("user", JSON.stringify(user));
@@ -133,8 +227,20 @@ const DataProvide = ({ children }) => {
     userMeasurements,
     userMeasuremnetsData,
     setUpdateMedicines,
-    updateMedicines,userMedicines
-
+    updateMedicines,
+    updateAppointments,
+    setUpdateAppointments,
+    userMedicines,
+    setMenu,
+    setLoggedUser,
+    morningMedicines,
+    noonMedicines,
+    nightMedicines,
+    updateReports,
+    setUpdateReports,
+    userAppointments,
+    closeAppointMent,
+    userReports
   };
 
   return <Context.Provider value={info}>{children}</Context.Provider>;
