@@ -171,7 +171,7 @@ const AddReportsModal = ({ isOpen, onOpen, onClose, props }) => {
 
                 {props.showReport && (
                   <div className="w-full h-full p-5">
-                    <img src={props.report.img} alt="" />
+                    <img className="w-full h-full object-cover" src={props.report.img} alt="" />
                   </div>
                 )}
               </ModalBody>
