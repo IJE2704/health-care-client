@@ -169,7 +169,7 @@ const DashboardPage = () => {
                 <p className="text-black text-sm 2xl:text-base">Weight </p>
                 {userMeasurements?.weight ? (
                   <p className="text-black text-sm 2xl:text-base">
-                    {userMeasurements?.weight} kg
+                    {userMeasurements?.weight} kg                    
                   </p>
                 ) : (
                   <h1 className="text-sm text-center text-red-700 mt-3">

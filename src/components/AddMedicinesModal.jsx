@@ -268,7 +268,7 @@ const AddMedicinesModal = ({ isOpen, onOpen, onClose }) => {
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="startingDate"
                           name="startingDate"
-                          type="text"
+                          type="date"
                           value={medicinesFormatData.startingDate}
                           onChange={handleMedicinesDataChange}
                           placeholder="date"
@@ -286,7 +286,7 @@ const AddMedicinesModal = ({ isOpen, onOpen, onClose }) => {
                           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                           id="endingDate"
                           name="endingDate"
-                          type="text"
+                          type="date"
                           value={medicinesFormatData.endingDate}
                           onChange={handleMedicinesDataChange}
                           placeholder="date"
