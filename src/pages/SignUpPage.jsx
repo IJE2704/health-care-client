@@ -79,7 +79,7 @@ const SignUpPage = () => {
   };
 
   return (
-    <div className="h-screen mx-4 lg:mx-auto flex flex-col justify-center items-center bg p-10">
+    <div className="2xl:h-screen mx-4 lg:mx-auto flex flex-col justify-center items-center bg p-10">
       <h1 className="text-center text-5xl font-bold text-[#ed4286] pt-10 2xl:pt-16">
         Health Care
       </h1>
@@ -102,14 +102,14 @@ const SignUpPage = () => {
             <div className="flex justify-between items-center">
               <div className="mb-4">
                 <label
-                  htmlFor="phone"
+                  htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Name
                 </label>
                 <input
                   type="text"
-                  id="Name"
+                  id="name"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
@@ -132,7 +132,7 @@ const SignUpPage = () => {
                   value={formData.username}
                   onChange={handleChange}
                   className="mt-1 p-2 w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter your password"
+                  placeholder="Enter your username"
                   required
                 />
               </div>
@@ -140,7 +140,7 @@ const SignUpPage = () => {
             <div className="flex justify-between items-center">
               <div className="mb-4">
                 <label
-                  htmlFor="phone"
+                  htmlFor="password"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Password
@@ -152,13 +152,13 @@ const SignUpPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   className="mt-1 p-2 w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter your user name"
+                  placeholder="Enter your password"
                   required
                 />
               </div>
               <div className="mb-4">
                 <label
-                  htmlFor="phone"
+                  htmlFor="password"
                   className="block text-sm font-medium text-gray-700"
                 >
                   Confirm Password
@@ -170,7 +170,7 @@ const SignUpPage = () => {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className="mt-1 p-2 w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter your user name"
+                  placeholder="Enter your confirm password"
                   required
                 />
               </div>
@@ -190,7 +190,7 @@ const SignUpPage = () => {
                   value={formData.mail}
                   onChange={handleChange}
                   className="mt-1 p-2 w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter your password"
+                  placeholder="Enter your email"
                   required
                 />
               </div>
@@ -208,7 +208,7 @@ const SignUpPage = () => {
                   value={formData.age}
                   onChange={handleChange}
                   className="mt-1 p-2 w-full border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter your user name"
+                  placeholder="Enter your age"
                   required
                 />
               </div>

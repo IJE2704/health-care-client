@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BiSolidInjection } from "react-icons/bi";
 import { FaTablets } from "react-icons/fa6";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { TbMedicineSyrup } from "react-icons/tb";
+import { Context } from "../provider/DataProvide";
 
-const MedicinesCart = ({ medicine }) => {
+const MedicinesCart = ({ medicine,handleDeleteMedicine }) => {
   // console.log(medicine);
+  const {userMedicines,setUserMedicines} = useContext(Context);
   const {
     _id,
     name,
@@ -72,7 +74,7 @@ const MedicinesCart = ({ medicine }) => {
         </div>
       </div>
       <div className="col-span-1 flex  justify-center items-center gap-5 py-5">
-        <RiDeleteBin6Line className="text-red-600" />
+        <RiDeleteBin6Line onClick={()=>handleDeleteMedicine(_id)} className="text-red-600" />
       </div>
     </div>
   );

@@ -50,7 +50,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="h-screen  mx-4 lg:mx-auto flex-col justify-center items-center bg p-10">
+    <div className="2xl:h-screen mx-4 lg:mx-auto flex-col justify-center items-center bg-image p-10">
       <h1 className="text-center text-5xl font-bold text-[#ed4286] pt-10 2xl:pt-16">
         Health Care
       </h1>

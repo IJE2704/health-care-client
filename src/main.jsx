@@ -16,6 +16,7 @@ import AppointmentsPage from "./pages/dashboard/Appointments.jsx/AppointmentsPag
 import PlanPage from "./pages/dashboard/Plans/PlanPage.jsx";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClient, QueryClientProvider } from "react-query";
+// import { QueryClient, QueryClientProvider } from "react-query";
 
 const queryClient = new QueryClient();
 

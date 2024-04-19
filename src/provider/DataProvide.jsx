@@ -16,8 +16,8 @@ const DataProvide = ({ children }) => {
   const [userMeasurements, setUserMeasurements] = useState({});
   const [userMedicines, setUserMedicines] = useState([]);
   const [userAppointments, setUserAppointMents] = useState([]);
-  const [closeAppointMent,setCloseAppointment] = useState({})
-  const [userReports,setuserReports] = useState([]);
+  const [closeAppointMent, setCloseAppointment] = useState({});
+  const [userReports, setuserReports] = useState([]);
   const [update, setUpdate] = useState(0);
   const [updateMedicines, setUpdateMedicines] = useState(0);
   const [updateAppointments, setUpdateAppointments] = useState(0);
@@ -101,8 +101,6 @@ const DataProvide = ({ children }) => {
         );
         const appointMentsData = await appointmentsResponse.json();
         console.log(appointMentsData);
-        
-        
 
         // Sort the data based on date and time
         appointMentsData.sort((a, b) => {
@@ -125,7 +123,7 @@ const DataProvide = ({ children }) => {
           return minuteComparison;
         });
         setUserAppointMents(appointMentsData);
-        setCloseAppointment(appointMentsData[0])
+        setCloseAppointment(appointMentsData[0]);
         // Print sorted data
         console.log(appointMentsData);
       } catch (error) {
@@ -147,13 +145,9 @@ const DataProvide = ({ children }) => {
         );
         const reportsData = await reportsResponse.json();
         console.log(reportsData);
-        
-        
 
-        
-      
         setuserReports(reportsData);
-        
+
         // Print sorted data
         console.log(reportsData);
       } catch (error) {
@@ -231,6 +225,7 @@ const DataProvide = ({ children }) => {
     updateAppointments,
     setUpdateAppointments,
     userMedicines,
+    setUserMedicines,
     setMenu,
     setLoggedUser,
     morningMedicines,
@@ -240,7 +235,10 @@ const DataProvide = ({ children }) => {
     setUpdateReports,
     userAppointments,
     closeAppointMent,
-    userReports
+    userReports,
+    setuserReports,
+    setUserAppointMents,
+    setCloseAppointment,
   };
 
   return <Context.Provider value={info}>{children}</Context.Provider>;

@@ -12,6 +12,9 @@ body{
   background: linear-gradient(180deg, #FFEBFD 0%, #E5FCF9 99.99%, #999 100%);
 }
 
+.bg-image{
+  background-image: linear-gradient(180deg, #FFEBFD 0%, #E5FCF9 99.99%, #999 100%);
+}
 .btn{
   border-radius: 7px;
   background: linear-gradient(106deg, rgba(255, 190, 189, 0.70) 12.31%, rgba(255, 131, 182, 0.70) 100%);
@@ -24,5 +27,9 @@ body{
 
 .bg-btn{
   border-radius: 7px 0 0 7px;
+  background: linear-gradient(106deg, rgba(255, 190, 189, 0.70) 12.31%, rgba(255, 131, 182, 0.70) 100%);
+}
+.bg-cart-btn{
+  border-radius: 0px 0px 7px 7px;
   background: linear-gradient(106deg, rgba(255, 190, 189, 0.70) 12.31%, rgba(255, 131, 182, 0.70) 100%);
 }

@@ -1,10 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../provider/DataProvide";
 import { CiBellOn } from "react-icons/ci";
+import { FaUserAlt } from "react-icons/fa";
+import { useDisclosure } from "@chakra-ui/react";
+import ProfileModal from "../components/ProfileModal";
 
 const Header = () => {
-  const { loggedUser, selectedMenu,date,setDate } = useContext(Context);
-  
+  const { loggedUser, selectedMenu, date, setDate } = useContext(Context);
+  const {isOpen,onOpen,onClose} = useDisclosure();
+
   const [header, setHeader] = useState("");
   const [searchValue, setSearchValue] = useState("");
   const handleSearchChange = (event) => {
@@ -55,9 +59,17 @@ const Header = () => {
           <CiBellOn className="text-xl" />
         </div>
       </div>
-      <div className="col-span-1 flex justify-center items-center">
-        <h1 className="text-[#303030] text-[24px]  2xl:text-[28px] font-bold">{loggedUser.name}</h1>
+      <div onClick={onOpen} className="col-span-1 flex justify-end gap-5 items-center cursor-pointer mr-10">
+        <h1 className="text-[#303030] text-[24px]  2xl:text-[28px] font-bold">
+          {loggedUser.name}
+        </h1>{" "}
+        <FaUserAlt  className="text-2xl text-pink-500 "></FaUserAlt>
       </div>
+      <ProfileModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      ></ProfileModal>
     </div>
   );
 };

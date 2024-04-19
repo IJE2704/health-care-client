@@ -12,6 +12,7 @@ import { TbReportSearch } from "react-icons/tb";
 import { FaUserDoctor } from "react-icons/fa6";
 import { MdOutlineTipsAndUpdates } from "react-icons/md";
 import logo from '../assets/logo.png'
+import { GoGraph } from "react-icons/go";
 
 const Nav = () => {
   const { user, selectedMenu, setSelectedMenu,logOut } = useContext(Context);
@@ -70,9 +71,19 @@ const Nav = () => {
         </Link>
         <Link to="/dashboard/plans">
           <div
-            onClick={() => setSelectedMenu("Teachers")}
+            onClick={() => setSelectedMenu("Analysis")}
             className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl 2xl:text-2xl w-full  hover:btn hover:border-pink-300 border py-4 rounded-br-lg rounded-tr-lg ${
-              selectedMenu === "Teachers" ? "btn text-white" : ""
+              selectedMenu === "Analysis" ? "btn text-white" : ""
+            }`}
+          >
+            <GoGraph className="text-pink-700" /> <h1>Analysis</h1>
+          </div>
+        </Link>
+        <Link to="/dashboard/plans">
+          <div
+            onClick={() => setSelectedMenu("Tips")}
+            className={`flex justify-start pl-[50px] 2xl:pl-[100px] items-center gap-4 text-base md:text-xl 2xl:text-2xl w-full  hover:btn hover:border-pink-300 border py-4 rounded-br-lg rounded-tr-lg ${
+              selectedMenu === "Tips" ? "btn text-white" : ""
             }`}
           >
             <MdOutlineTipsAndUpdates className="text-pink-700" /> <h1>Tips</h1>
