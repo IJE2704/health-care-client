@@ -24,7 +24,7 @@ import Swal from "sweetalert2";
 import { FaRegUserCircle, FaUserCircle } from "react-icons/fa";
 const ProfileModal = ({ isOpen, onOpen, onClose }) => {
   const { loggedUser, userMedicines,userAppointments,userMeasurements, userReports } = useContext(Context);
-  console.log(userMeasurements);
+  // console.log(userMeasurements);
   const { userId, name, username, number, age, gender, email } =
     loggedUser ?? {};
     const {height,weight,bmi} = userMeasurements ?? {};

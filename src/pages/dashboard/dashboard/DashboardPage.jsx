@@ -22,7 +22,7 @@ const DashboardPage = () => {
     closeAppointMent,
   } = useContext(Context);
 
-  console.log(closeAppointMent);
+  // console.log(closeAppointMent);
   // console.log(userBloodPressure, userBloodSugar, userBloodO2, userMeasurements);
   // console.log(userMedicines)
   return (

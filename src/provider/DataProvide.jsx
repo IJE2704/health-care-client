@@ -100,7 +100,7 @@ const DataProvide = ({ children }) => {
           `https://healthcare-2fif.onrender.com/appointment/${loggedUser?.userId}`
         );
         const appointMentsData = await appointmentsResponse.json();
-        console.log(appointMentsData);
+        // console.log(appointMentsData);
 
         // Sort the data based on date and time
         appointMentsData.sort((a, b) => {
@@ -125,7 +125,7 @@ const DataProvide = ({ children }) => {
         setUserAppointMents(appointMentsData);
         setCloseAppointment(appointMentsData[0]);
         // Print sorted data
-        console.log(appointMentsData);
+        // console.log(appointMentsData);
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error state or alert user
@@ -144,12 +144,12 @@ const DataProvide = ({ children }) => {
           `https://healthcare-2fif.onrender.com/report/${loggedUser?.userId}`
         );
         const reportsData = await reportsResponse.json();
-        console.log(reportsData);
+        // console.log(reportsData);
 
         setuserReports(reportsData);
 
         // Print sorted data
-        console.log(reportsData);
+        // console.log(reportsData);
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error state or alert user
