@@ -94,9 +94,9 @@ const AppointmentsPage = () => {
         <div className="  flex w-full justify-center items-end mb-4 mt-8">
           <button
             onClick={onOpen}
-            className=" btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full rounded-[10px] font-semibold hover:scale-105"
+            className=" side-btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full  font-semibold hover:scale-105"
           >
-            <p>Add</p> <IoMdAdd></IoMdAdd>
+            <IoMdAdd></IoMdAdd>
           </button>
         </div>
       </div>

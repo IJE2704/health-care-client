@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "react-query";
 
 import { removeData } from "../../../constants/removeData";
 import Swal from "sweetalert2";
+import SideButton from "../../../components/SideButton";
 
 
 
@@ -76,16 +77,17 @@ const MedicinesPage = () => {
           <p>No data</p>
         )}
       </div>
-      <div className=" w-[40px] hover:w-[100px] bottom-[25%]  right-0 fixed mt-10">
+      <div className=" w-[40px] hover:w-[100px] bottom-[25%]  right-0 fixed">
         <div
           onClick={onOpen}
           className="  flex w-full justify-center items-end mb-4 mt-8"
         >
-          <button className=" btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full rounded-[10px] font-semibold hover:scale-105 ">
-            <p>Add</p> <IoMdAdd></IoMdAdd>
+          <button className=" side-btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full  font-semibold hover:scale-105 ">
+            <p className="hidden hover:block">Add</p> <IoMdAdd></IoMdAdd>
           </button>
         </div>
       </div>
+      {/* <SideButton></SideButton> */}
       <AddMedicinesModal
         isOpen={isOpen}
         onOpen={onOpen}

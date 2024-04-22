@@ -6,10 +6,10 @@ import AddDataModal from "../../../components/AddDataModal";
 import { useDisclosure } from "@chakra-ui/react";
 import { Context } from "../../../provider/DataProvide";
 import { IoMdAdd } from "react-icons/io";
+import Calendar from "../../../components/Calender";
 
 const DashboardPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const {
     userBloodPressure,
     userBloodSugar,
@@ -20,15 +20,14 @@ const DashboardPage = () => {
     noonMedicines,
     nightMedicines,
     closeAppointMent,
+    bloodInformation,
   } = useContext(Context);
-
-  // console.log(closeAppointMent);
-  // console.log(userBloodPressure, userBloodSugar, userBloodO2, userMeasurements);
-  // console.log(userMedicines)
+  // console.log(bloodInformation)
+  const {bloodPressureCondition,sugarConditon,oxygenCondition,bloodLowPressure,bloodHighPressure,bloodSugar,bloodO2} = bloodInformation;
   return (
     <div className="grid grid-cols-4 relative w-full h-full">
       <div className="col-span-3 mr-4 2xl:mr-6">
-        <div className="grid grid-cols-3 gap-4">
+        <div className={`grid grid-cols-3 gap-4 ${userBloodO2 || userBloodPressure || userBloodSugar ? '':'min-h-[150px] 2xl:min-h-[200px]'}`}>
           <div className=" px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7]">
             <div className="flex justify-center gap-2 items-center">
               <div className="w-[30px] h-[30px] bg-[#D6FFDD] rounded-lg flex justify-center items-center">
@@ -38,24 +37,24 @@ const DashboardPage = () => {
                 Blood Oxygen
               </h1>
             </div>
-            {userBloodO2 ? (
+            {bloodO2 ? (
               <>
                 <div className="flex justify-between items-center">
                   <div className=" flex justify-center items-center gap-2 mt-4 ">
                     <h1 className=" text-[25px] 2xl:text-[32px] py-0">
-                      {userBloodO2?.bloodO2}
+                      {bloodO2}
                     </h1>
                     <p className="text-[#818181] text-sm 2xl:text-base">%</p>
                   </div>
 
                   <div
                     className={`px-2 py-1 flex justify-center items-center ${
-                      userBloodO2?.condition === "Normal"
+                      oxygenCondition === "Normal"
                         ? "bg-[#D6FFDD]"
                         : "bg-red-600 text-white"
                     } rounded`}
                   >
-                    <h1 className="text-xs">{userBloodO2?.condition}</h1>
+                    <h1 className="text-xs">{oxygenCondition}</h1>
                   </div>
                 </div>
               </>
@@ -76,26 +75,26 @@ const DashboardPage = () => {
                 Blood Sugar
               </h1>
             </div>
-            {userBloodSugar ? (
+            {bloodSugar ? (
               <>
                 <div className="flex justify-between items-center">
                   <div className=" flex justify-center items-center gap-2 mt-4 ">
                     <h1 className=" text-[25px] 2xl:text-[32px] py-0">
-                      {userBloodSugar?.bloodSugar}{" "}
+                      {bloodSugar}{" "}
                     </h1>
                     <p className="text-[#818181] text-sm 2xl:text-base">
-                      mg/dl
+                      mmo/L
                     </p>
                   </div>
 
                   <div
                     className={`px-2 py-1 flex justify-center items-center ${
-                      userBloodSugar?.condition === "Normal"
+                      sugarConditon === "Normal"
                         ? "bg-[#F8DEBD]"
                         : "bg-red-600 text-white"
                     } rounded`}
                   >
-                    <h1 className="text-xs">{userBloodSugar.condition}</h1>
+                    <h1 className="text-xs">{sugarConditon}</h1>
                   </div>
                 </div>
               </>
@@ -117,26 +116,26 @@ const DashboardPage = () => {
                 Blood Pressure
               </h1>
             </div>
-            {userBloodPressure ? (
+            {bloodHighPressure ? (
               <>
                 <div className="flex justify-between items-center">
                   <div className=" flex justify-center items-center gap-2 mt-4 ">
                     <h1 className=" text-[25px] 2xl:text-[32px] py-0">
-                      {userBloodPressure?.bloodHighPressure}{" "}
+                      {bloodHighPressure}{" "}
                     </h1>
                     <p className="text-[#818181] text-sm 2xl:text-base">
-                      / {userBloodPressure?.bloodLowPressure} mmgh
+                      / {bloodLowPressure} mmgh
                     </p>
                   </div>
 
                   <div
                     className={`px-2 py-1 flex justify-center items-center ${
-                      userBloodPressure?.condition === "Normal"
+                      bloodPressureCondition === "Normal"
                         ? "bg-[#D0fbff]"
                         : "bg-red-600 text-white"
                     } rounded`}
                   >
-                    <h1 className="text-xs">{userBloodPressure.condition}</h1>
+                    <h1 className="text-xs">{bloodPressureCondition}</h1>
                   </div>
                 </div>
               </>
@@ -149,7 +148,7 @@ const DashboardPage = () => {
             )}
           </div>
         </div>
-        <div className="bg-white min-h-[100px] rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
+        <div className="bg-white min-h-[200px] 2xl:min-h-[300px] rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
           <h1 className="text-center font-bold text-xl 2xl:text-2xl my-5">
             Medicines
           </h1>
@@ -204,7 +203,7 @@ const DashboardPage = () => {
                     </div>
                   </div>
                   <div className="col-span-1 border-r ">
-                  <div className="flex justify-center items-center border-b  bg-[#D0fbff]">
+                    <div className="flex justify-center items-center border-b  bg-[#D0fbff]">
                       <h1 className="text-center font-medium  py-2">Night</h1>
                     </div>
                     <div className="p-5">
@@ -272,15 +271,15 @@ const DashboardPage = () => {
           )}
         </div>
       </div>
-      <div className="col-span-1 flex flex-col mr-3">
+      <div className="col-span-1 flex flex-col gap-3 mr-3">
         <div className="">
-          <div className="w-full bg-black rounded-xl p-3 py-7 2xl:py-5 2xl:p-5 shadow-xl">
+          <div className="w-full bg-black rounded-xl p-3 py-4 2xl:py-5 2xl:p-5 shadow-xl">
             <h1 className="text-white text-lg 2xl:text-[22px] ">
               BMI Calculator
             </h1>
 
-            <div className=" flex flex-col gap-3 mt-5">
-              <div className="flex justify-between items-center bg-[#F8DEBD] rounded-xl 2xl:px-5 2xl:py-6 px-4 py-5">
+            <div className=" flex flex-col gap-3 mt-2 2xl:mt-5">
+              <div className="flex justify-between items-center bg-[#F8DEBD] rounded-xl 2xl:px-5 2xl:py-6 px-3 py-3">
                 <p className="text-black text-sm 2xl:text-base">Height </p>
                 {userMeasurements?.height ? (
                   <p className="text-black text-sm 2xl:text-base">
@@ -292,7 +291,7 @@ const DashboardPage = () => {
                   </h1>
                 )}
               </div>
-              <div className="flex justify-between items-center bg-[#D0FBFF] rounded-xl 2xl:px-5 2xl:py-6 px-4 py-5">
+              <div className="flex justify-between items-center bg-[#D0FBFF] rounded-xl 2xl:px-5 2xl:py-6 px-3 py-3">
                 <p className="text-black text-sm 2xl:text-base">Weight </p>
                 {userMeasurements?.weight ? (
                   <p className="text-black text-sm 2xl:text-base">
@@ -305,12 +304,12 @@ const DashboardPage = () => {
                 )}
               </div>
 
-              <div className=" bg-[#4A4949] rounded-xl 2xl:px-5 2xl:py-6 px-4 py-5">
+              <div className=" bg-[#4A4949] rounded-xl 2xl:px-5 2xl:py-6 px-3 py-3">
                 <h1 className="text-white text-sm 2xl:text-base">
                   Body Mass Index (BMI)
                 </h1>
 
-                <div className="flex justify-between items-center mt-5">
+                <div className="flex justify-between items-center mt-2 2xl:mt-5 ">
                   <div>
                     {userMeasurements?.bmi ? (
                       <h1 className="text-white text-sm">
@@ -338,14 +337,10 @@ const DashboardPage = () => {
             </div>
           </div>
         </div>
-      </div>
-      <AddDataModal
-        isOpen={isOpen}
-        onOpen={onOpen}
-        onClose={onClose}
-      ></AddDataModal>
-      <div className="absolute w-[200px] bottom-0 right-0 mr-5 2xl:mr-16">
-        <div className="flex w-full justify-center items-end mb-4 mt-8">
+        <div className="bg-white rounded-xl p-4 shadow-xl">
+          <Calendar></Calendar>
+        </div>
+        <div className="flex w-full justify-center items-end mb-4 mt-4">
           <button
             onClick={onOpen}
             className=" btn flex justify-center items-center gap-3 text-black py-3 w-full px-2 rounded-[10px] font-semibold hover:scale-105"
@@ -354,6 +349,11 @@ const DashboardPage = () => {
           </button>
         </div>
       </div>
+      <AddDataModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      ></AddDataModal>
     </div>
   );
 };

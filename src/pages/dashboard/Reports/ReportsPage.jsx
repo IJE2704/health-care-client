@@ -8,6 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { ImEnlarge } from "react-icons/im";
 import Swal from "sweetalert2";
 import { removeData } from "../../../constants/removeData";
+import { IoAdd } from "react-icons/io5";
 const ReportsPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userReports, setuserReports } = useContext(Context);
@@ -100,9 +101,9 @@ const ReportsPage = () => {
         <div className=" w-[40px] hover:w-[100px] flex  justify-center items-end mb-4 bottom-[25%]  right-0 fixed">
           <button
             onClick={handleOpenAddReportsModal}
-            className=" btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full hover:rounded-[10px] font-semibold hover:scale-105"
+            className=" side-btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full  font-semibold hover:scale-105"
           >
-            <p>Add</p>
+            <IoAdd></IoAdd>
           </button>
         </div>
       

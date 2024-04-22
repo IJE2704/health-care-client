@@ -6,8 +6,26 @@ import { useDisclosure } from "@chakra-ui/react";
 import ProfileModal from "../components/ProfileModal";
 
 const Header = () => {
-  const { loggedUser, selectedMenu, date, setDate } = useContext(Context);
-  const {isOpen,onOpen,onClose} = useDisclosure();
+  const { loggedUser, selectedMenu, date, setDate, notifications } =
+    useContext(Context);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [props,setProps] = useState({});
+  
+  const openNotificationsModal = ()=>{
+    setProps({
+      title:"Notifications",
+      notifi:'notifications'
+    })
+    onOpen();
+  }
+
+  const openProfileModal = ()=>{
+    setProps({
+      title:'Profile',
+      profile:"profile"
+    })
+    onOpen();
+  }
 
   const [header, setHeader] = useState("");
   const [searchValue, setSearchValue] = useState("");
@@ -28,6 +46,7 @@ const Header = () => {
   }, [selectedMenu]);
 
   useEffect(() => {
+    // console.log(notifications)
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     const month = String(currentDate.getMonth() + 1).padStart(2, "0"); // Adding 1 because getMonth() returns zero-based month index
@@ -55,20 +74,33 @@ const Header = () => {
             onChange={handleSearchChange}
           />
         </div>
-        <div className="flex justify-center items-center p-[10px] rounded-md border-gray-300 border hover:hover:border-pink-300 bg-white cursor-pointer">
+        <div onClick={openNotificationsModal} className="relative flex justify-center items-center p-[10px] rounded-md border-gray-300 border hover:hover:border-pink-300 bg-white cursor-pointer">
           <CiBellOn className="text-xl" />
+          <div className="absolute top-[-10px] right-[-10px]">
+            {notifications.length != 0 && (
+              <>
+                <div className="w-[20px] h-[20px] bg-red-600 rounded-full flex justify-center items-center">
+                  <p className="text-white text-xs">{notifications.length}</p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </div>
-      <div onClick={onOpen} className="col-span-1 flex justify-end gap-5 items-center cursor-pointer mr-10">
+      <div
+        onClick={openProfileModal}
+        className="col-span-1 flex justify-end gap-5 items-center cursor-pointer mr-10"
+      >
         <h1 className="text-[#303030] text-[24px]  2xl:text-[28px] font-bold">
           {loggedUser.name}
         </h1>{" "}
-        <FaUserAlt  className="text-2xl text-pink-500 "></FaUserAlt>
+        <FaUserAlt className="text-2xl text-pink-500 "></FaUserAlt>
       </div>
       <ProfileModal
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
+        props={props}
       ></ProfileModal>
     </div>
   );

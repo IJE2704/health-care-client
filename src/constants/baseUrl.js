@@ -1,0 +1,1 @@
+export const baseurl = "https://healthcare-2fif.onrender.com"

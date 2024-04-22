@@ -1,6 +1,10 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { fetchData } from "../constants/fetchData";
+import { baseurl } from "../constants/baseUrl";
 export const Context = createContext();
+
 
 const DataProvide = ({ children }) => {
   const [selectedMenu, setMenu] = useState("");
@@ -25,43 +29,44 @@ const DataProvide = ({ children }) => {
   const [morningMedicines, setMorningMedicines] = useState([]);
   const [noonMedicines, setNoonMedicines] = useState([]);
   const [nightMedicines, setNightMedicines] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [bloodInformation,setBloodInformation] = useState({})
 
   useEffect(() => {
-    const fetchData = async () => {
+    const endpoint = `notification/${loggedUser.userId}`;
+    const fetchNotifications = async () => {
       try {
-        const o2Response = await fetch(
-          `https://healthcare-2fif.onrender.com/o2/${loggedUser?.userId}`
-        );
-        const o2Data = await o2Response.json();
-        const lastO2Data = o2Data[o2Data.length - 1];
-        setUserBloodO2(lastO2Data);
-        // console.log(lastO2Data);
-        setUserBloodO2Data(o2Data);
+        const notificationsData = await fetchData(endpoint);
+        const reverseNotification = notificationsData.reverse();
+        setNotifications(reverseNotification)
+        // console.log(reverseNotification)
+        
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchNotifications();
+  }, [loggedUser,update]);
 
-        const glucoseResponse = await fetch(
-          `https://healthcare-2fif.onrender.com/glucose/${loggedUser?.userId}`
-        );
-        const glucoseData = await glucoseResponse.json();
-        const lastGlucoseData = glucoseData[glucoseData.length - 1];
-        setUserBloodSugar(lastGlucoseData);
-        setUserBloodSugarData(glucoseData);
-
-        const pressureResponse = await fetch(
-          `https://healthcare-2fif.onrender.com/pressure/${loggedUser?.userId}`
-        );
-        const pressureData = await pressureResponse.json();
-        const lastPressureData = pressureData[pressureData.length - 1];
-        setUserBloodPressure(lastPressureData);
-        setUserBloodPressureData(pressureData);
-
-        const measurementsResponse = await fetch(
-          `https://healthcare-2fif.onrender.com/measurements/${loggedUser?.userId}`
+  useEffect(() => {
+    const fetchBloodInformation = async () => {
+      try {
+        const endPoint = `blood/information/${loggedUser.userId}`
+        const bloodInformationData = await fetchData(endPoint);
+        const lastBloodInformationData = bloodInformationData[bloodInformationData.length -1]
+        // console.log(lastBloodInformationData)
+        setBloodInformation(lastBloodInformationData)
+        // console.log(bloodInformationData)
+         const measurementsResponse = await fetch(
+          `${baseurl}/measurements/${loggedUser?.userId}`
         );
         const measurementsData = await measurementsResponse.json();
         const lastMeasurementsData =
           measurementsData[measurementsData.length - 1];
         setUserMeasurements(lastMeasurementsData);
         setUserMeasuremnetsData(measurementsData);
+
+       
       } catch (error) {
         console.error("Error fetching data:", error);
         // Handle error state or alert user
@@ -69,7 +74,7 @@ const DataProvide = ({ children }) => {
     };
 
     if (loggedUser?.userId) {
-      fetchData();
+      fetchBloodInformation();
     }
   }, [loggedUser, update]);
 
@@ -77,7 +82,7 @@ const DataProvide = ({ children }) => {
     const fetchData = async () => {
       try {
         const medicinesResponse = await fetch(
-          `https://healthcare-2fif.onrender.com/medicine/${loggedUser?.userId}`
+          `${baseurl}/medicine/${loggedUser?.userId}`
         );
         const medicinesData = await medicinesResponse.json();
         // console.log(medicinesData)
@@ -97,7 +102,7 @@ const DataProvide = ({ children }) => {
     const fetchData = async () => {
       try {
         const appointmentsResponse = await fetch(
-          `https://healthcare-2fif.onrender.com/appointment/${loggedUser?.userId}`
+          `${baseurl}/appointment/${loggedUser?.userId}`
         );
         const appointMentsData = await appointmentsResponse.json();
         // console.log(appointMentsData);
@@ -141,7 +146,7 @@ const DataProvide = ({ children }) => {
     const fetchData = async () => {
       try {
         const reportsResponse = await fetch(
-          `https://healthcare-2fif.onrender.com/report/${loggedUser?.userId}`
+          `${baseurl}/report/${loggedUser?.userId}`
         );
         const reportsData = await reportsResponse.json();
         // console.log(reportsData);
@@ -239,6 +244,9 @@ const DataProvide = ({ children }) => {
     setuserReports,
     setUserAppointMents,
     setCloseAppointment,
+    notifications,
+    setNotifications,
+    bloodInformation
   };
 
   return <Context.Provider value={info}>{children}</Context.Provider>;
