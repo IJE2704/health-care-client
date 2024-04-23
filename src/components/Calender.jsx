@@ -54,7 +54,7 @@ const Calendar = () => {
         if (i === 0 && j < startingDay) {
           week.push(<td key={`empty-${j}`} className="border border-transparent"></td>);
         } else if (day > daysInMonth) {
-          break;
+          week.push(<td key={`empty-${j}`} className="border border-transparent"></td>);
         } else {
           const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), day);
           week.push(
@@ -78,7 +78,7 @@ const Calendar = () => {
   };
 
   return (
-    <div className="w-full  mt-2 text-black">
+    <div className="w-full mt-2 text-black">
       <div className="flex items-center justify-between">
         <button
           className="p-1 rounded-full hover:bg-gray-200"

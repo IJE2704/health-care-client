@@ -28,7 +28,7 @@ const Nav = () => {
           <img className="w-[70px] h-[70px] 2xl:w-[100px] 2xl:h-[100px]" src={logo} alt="" />
         </div>
       </Link>
-      <div className="mt-10 2xl:mt-16 flex flex-col gap-2 pr-4 flex-1">
+      <div className="mt-6 2xl:mt-16 flex flex-col gap-2 pr-4 flex-1">
         <Link to={`/dashboard/home`}>
           <div
             onClick={() => setSelectedMenu("Dashboard")}

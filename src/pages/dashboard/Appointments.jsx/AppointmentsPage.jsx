@@ -31,10 +31,12 @@ const AppointmentsPage = () => {
             text: "Your file has been deleted.",
             icon: "success",
           });
-          const newData = userAppointments.filter((appointment) => appointment._id !== id);
+          const newData = userAppointments.filter(
+            (appointment) => appointment._id !== id
+          );
           // console.log(newData);
           setUserAppointMents(newData);
-          setCloseAppointment(newData[0])
+          setCloseAppointment(newData[0]);
         }
       });
     }
@@ -81,8 +83,13 @@ const AppointmentsPage = () => {
                 <p className="text-base font-bold italic">{appointment.time}</p>
               </div>
               <div className="col-span-1 flex justify-center items-center gap-5">
-                <p className="text-base font-bold italic">{appointment.date}</p>{" "}
-                <RiDeleteBin6Line onClick={()=>handleDeleteAppointment(appointment._id)} className="text-red-600" />
+                <p className="text-base font-bold text-[#366e71]">
+                  {appointment.date}
+                </p>{" "}
+                <RiDeleteBin6Line
+                  onClick={() => handleDeleteAppointment(appointment._id)}
+                  className="text-red-600"
+                />
               </div>
             </div>
           ))
@@ -90,7 +97,7 @@ const AppointmentsPage = () => {
           <p>No data</p>
         )}
       </div>
-      <div className="  w-[40px] hover:w-[100px] bottom-[25%]  right-0 fixed mt-10">
+      <div className="  w-[40px] hover:w-[100px] bottom-[10%]  right-0 fixed mt-10">
         <div className="  flex w-full justify-center items-end mb-4 mt-8">
           <button
             onClick={onOpen}

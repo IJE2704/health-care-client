@@ -39,7 +39,7 @@ const MedicinesCart = ({ medicine,handleDeleteMedicine }) => {
         )}
       </div>
       <div className="col-span-2 flex justify-center items-center py-5">
-        <p>{name}</p>
+        <p className="font-bold">{name}</p>
       </div>
       <div className="col-span-2 flex justify-center items-center gap-3 py-5">
         <div className="w-[15px] h-[15px] rounded-full">
@@ -69,8 +69,9 @@ const MedicinesCart = ({ medicine,handleDeleteMedicine }) => {
       </div>
       <div className="col-span-2 flex  justify-center items-center gap-5 py-5">
         <div className="">
-          <p>Start: {startingDate}</p>
-          <p>End: {endingDate}</p>
+          <p className="text-green-600 font-bold">Start: {startingDate}</p>
+
+          <p className="text-red-400 font-bold">End: {endingDate}</p>
         </div>
       </div>
       <div className="col-span-1 flex  justify-center items-center gap-5 py-5">

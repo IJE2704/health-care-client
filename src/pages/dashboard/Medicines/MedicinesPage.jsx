@@ -77,7 +77,7 @@ const MedicinesPage = () => {
           <p>No data</p>
         )}
       </div>
-      <div className=" w-[40px] hover:w-[100px] bottom-[25%]  right-0 fixed">
+      <div className=" w-[40px] hover:w-[100px] bottom-[10%]  right-0 fixed">
         <div
           onClick={onOpen}
           className="  flex w-full justify-center items-end mb-4 mt-8"

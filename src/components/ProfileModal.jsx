@@ -78,30 +78,30 @@ const ProfileModal = ({ isOpen, onOpen, onClose, props }) => {
                       </p>
                       <div className="w-full h-[2px] bg-btn "></div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">Name : </h1>{" "}
-                        <h1 className="text-lg italic">{name}</h1>
+                        <h1 className="text-lg font-bold ">Name : </h1>{" "}
+                        <h1 className="text-lg ">{name}</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">
+                        <h1 className="text-lg font-bold ">
                           User Name:{" "}
                         </h1>{" "}
-                        <h1 className="text-lg italic">{username}</h1>
+                        <h1 className="text-lg ">{username}</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">Email: </h1>{" "}
-                        <h1 className="text-lg italic">{email}</h1>
+                        <h1 className="text-lg font-bold ">Email: </h1>{" "}
+                        <h1 className="text-lg ">{email}</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">Number : </h1>{" "}
-                        <h1 className="text-lg italic">{number}</h1>
+                        <h1 className="text-lg font-bold ">Number : </h1>{" "}
+                        <h1 className="text-lg ">{number}</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">Gender : </h1>{" "}
-                        <h1 className="text-lg italic">{gender}</h1>
+                        <h1 className="text-lg font-bold ">Gender : </h1>{" "}
+                        <h1 className="text-lg ">{gender}</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">Age : </h1>{" "}
-                        <h1 className="text-lg italic">{age}</h1>
+                        <h1 className="text-lg font-bold ">Age : </h1>{" "}
+                        <h1 className="text-lg ">{age}</h1>
                       </div>
                     </div>
                     <div className="w-full mt-5 mb-10">
@@ -110,42 +110,42 @@ const ProfileModal = ({ isOpen, onOpen, onClose, props }) => {
                       </p>
                       <div className="w-full h-[2px] bg-btn "></div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">
+                        <h1 className="text-lg font-bold ">
                           Ongoing Medicine :{" "}
                         </h1>{" "}
-                        <h1 className="text-lg italic">
+                        <h1 className="text-lg ">
                           {userMedicines.length}
                         </h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">
+                        <h1 className="text-lg font-bold ">
                           Appointments:{" "}
                         </h1>{" "}
-                        <h1 className="text-lg italic">
+                        <h1 className="text-lg ">
                           {userAppointments.length}
                         </h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">Reports : </h1>{" "}
-                        <h1 className="text-lg italic">{userReports.length}</h1>
+                        <h1 className="text-lg font-bold ">Reports : </h1>{" "}
+                        <h1 className="text-lg ">{userReports.length}</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">
+                        <h1 className="text-lg font-bold ">
                           Last Height:{" "}
                         </h1>{" "}
-                        <h1 className="text-lg italic">{height} Ft</h1>
+                        <h1 className="text-lg ">{height} Ft</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">
+                        <h1 className="text-lg font-bold ">
                           Last Weight :{" "}
                         </h1>{" "}
-                        <h1 className="text-lg italic">{weight} kg</h1>
+                        <h1 className="text-lg ">{weight} kg</h1>
                       </div>
                       <div className="flex justify-between items-center px-4 py-1">
-                        <h1 className="text-lg font-bold italic">
+                        <h1 className="text-lg font-bold ">
                           Last BMI :{" "}
                         </h1>{" "}
-                        <h1 className="text-lg italic">{bmi}</h1>
+                        <h1 className="text-lg ">{bmi}</h1>
                       </div>
                     </div>
                   </div>

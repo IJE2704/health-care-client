@@ -98,7 +98,7 @@ const ReportsPage = () => {
         )}
       </div>
       
-        <div className=" w-[40px] hover:w-[100px] flex  justify-center items-end mb-4 bottom-[25%]  right-0 fixed">
+        <div className=" w-[40px] hover:w-[100px] flex  justify-center items-end mb-4 bottom-[10%]  right-0 fixed">
           <button
             onClick={handleOpenAddReportsModal}
             className=" side-btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full  font-semibold hover:scale-105"

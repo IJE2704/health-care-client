@@ -28,7 +28,7 @@ const DashboardPage = () => {
     <div className="grid grid-cols-4 relative w-full h-full">
       <div className="col-span-3 mr-4 2xl:mr-6">
         <div className={`grid grid-cols-3 gap-4 ${userBloodO2 || userBloodPressure || userBloodSugar ? '':'min-h-[150px] 2xl:min-h-[200px]'}`}>
-          <div className=" px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7]">
+          <div className={` px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7] ${oxygenCondition ==="High" || oxygenCondition === 'Low' ? "border-[1px] border-red-500":""}`}>
             <div className="flex justify-center gap-2 items-center">
               <div className="w-[30px] h-[30px] bg-[#D6FFDD] rounded-lg flex justify-center items-center">
                 <CiPillsBottle1 className="text-green-700" />
@@ -39,7 +39,7 @@ const DashboardPage = () => {
             </div>
             {bloodO2 ? (
               <>
-                <div className="flex justify-between items-center">
+                <div className={`flex justify-between items-center `}>
                   <div className=" flex justify-center items-center gap-2 mt-4 ">
                     <h1 className=" text-[25px] 2xl:text-[32px] py-0">
                       {bloodO2}
@@ -66,7 +66,7 @@ const DashboardPage = () => {
               </>
             )}
           </div>
-          <div className=" px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7]">
+          <div className={` px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7] ${sugarConditon ==="High" || sugarConditon === 'Low' ? "border-[1px] border-red-500":""}`}>
             <div className="flex justify-center gap-2 items-center">
               <div className="w-[30px] h-[30px] bg-[#F8DEBD] rounded-lg flex justify-center items-center">
                 <CiPillsBottle1 className="text-[#E79B38]" />
@@ -107,7 +107,7 @@ const DashboardPage = () => {
             )}
           </div>
 
-          <div className=" px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7]">
+          <div className={` px-3 py-5 2xl:px-5 2xl:py-7 bg-white rounded-xl shadow-xl border border-[#E8E7E7] ${bloodPressureCondition ==="High" || bloodPressureCondition === 'Low' ? "border-[1px] border-red-500":""}`}>
             <div className="flex justify-center gap-2 items-center">
               <div className="w-[30px] h-[30px] bg-[#D0fbff] rounded-lg flex justify-center items-center">
                 <MdBloodtype className="text-[#478F96]" />
@@ -149,7 +149,7 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="bg-white min-h-[200px] 2xl:min-h-[300px] rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
-          <h1 className="text-center font-bold text-xl 2xl:text-2xl my-5">
+          <h1 className="text-center text-[#6A040f] font-bold text-xl 2xl:text-2xl my-5">
             Medicines
           </h1>
           <div>
@@ -163,7 +163,7 @@ const DashboardPage = () => {
               <>
                 <div className="grid grid-cols-3 ">
                   <div className="col-span-1 border-r border-r-pink-500">
-                    <div className="flex justify-center items-center border-b  bg-[#D6FFDD]">
+                    <div className="flex justify-center items-center border-b  bg-[#c7b3d4]">
                       <h1 className="text-center font-medium  py-2">Morning</h1>
                     </div>
                     <div className="p-5">
@@ -203,7 +203,7 @@ const DashboardPage = () => {
                     </div>
                   </div>
                   <div className="col-span-1 border-r ">
-                    <div className="flex justify-center items-center border-b  bg-[#D0fbff]">
+                    <div className="flex justify-center items-center border-b  bg-[#c7b3d4]">
                       <h1 className="text-center font-medium  py-2">Night</h1>
                     </div>
                     <div className="p-5">
@@ -228,7 +228,7 @@ const DashboardPage = () => {
           </div>
         </div>
         <div className="bg-white p-6 rounded-xl shadow-xl border border-[#E8E7E7] mt-6">
-          <h1 className="text-center font-bold text-green-600">
+          <h1 className="text-center font-bold text-[#6A040f]">
             Upcoming Appointment
           </h1>
 
@@ -256,7 +256,7 @@ const DashboardPage = () => {
                   </p>
                 </div>
                 <div className="col-span-1 flex justify-center items-center">
-                  <p className="text-base font-bold italic">
+                  <p className="text-base font-bold text-[#366e71]">
                     on {closeAppointMent.date}
                   </p>
                 </div>
@@ -273,7 +273,7 @@ const DashboardPage = () => {
       </div>
       <div className="col-span-1 flex flex-col gap-3 mr-3">
         <div className="">
-          <div className="w-full bg-black rounded-xl p-3 py-4 2xl:py-5 2xl:p-5 shadow-xl">
+          <div className="w-full bg-[#6D597A] rounded-xl p-3 py-4 2xl:py-5 2xl:p-5 shadow-xl">
             <h1 className="text-white text-lg 2xl:text-[22px] ">
               BMI Calculator
             </h1>
