@@ -3,14 +3,17 @@ import { Outlet } from "react-router-dom";
 import Nav from "../../Shared/Nav";
 import Header from "../../Shared/Header";
 import { Context } from "../../provider/DataProvide";
+import { Spinner } from "@chakra-ui/react";
 
 const DashBoard = () => {
-  const {loading,setLoading} = useContext(Context);
+  const { loading, setLoading } = useContext(Context);
   return (
     <div>
       {loading ? (
         <>
-          <p>Loading...</p>
+          <div className="flex justify-center items-start bg h-screen">
+            <Spinner className="mt-10" color="red.500" size="xl" />
+          </div>
         </>
       ) : (
         <div className="bg grid grid-cols-5 h-screen">

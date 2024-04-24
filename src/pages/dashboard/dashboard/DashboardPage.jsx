@@ -20,7 +20,8 @@ const DashboardPage = () => {
     bloodInformation,
   } = useContext(Context);
   // console.log(bloodInformation)
-  const {bloodPressureCondition,sugarConditon,oxygenCondition,bloodLowPressure,bloodHighPressure,bloodSugar,bloodO2} = bloodInformation;
+  const {bloodPressureCondition,sugarConditon,oxygenCondition,bloodLowPressure,bloodHighPressure,bloodSugar,bloodO2} = bloodInformation ?? {};
+  console.log(bloodInformation)
   return (
     <div className="grid grid-cols-4 relative w-full h-full">
       <div className="col-span-3 mr-4 2xl:mr-6">
