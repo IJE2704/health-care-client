@@ -20,7 +20,7 @@ import { Context } from "../provider/DataProvide";
 import Swal from "sweetalert2";
 import { baseurl } from "../constants/baseUrl";
 const AddDataModal = ({ isOpen, onOpen, onClose }) => {
-  const { loggedUser, date, setUpdate, update } = useContext(Context);
+  const { loggedUser, date, setUpdate, update,setLoading } = useContext(Context);
   const [updateO2, setUpdateO2] = useState(false);
   const [updateSugar, setUpdateSugar] = useState(false);
   const [updatePressure, setUpdatePressure] = useState(false);
@@ -67,6 +67,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
     };
 
     try {
+      setLoading(true);
       const response = await fetch(`${baseurl}/add/blood/information`, {
         method: "POST",
         headers: {
@@ -75,6 +76,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
         body: JSON.stringify(bloodInformation),
       });
       const data = await response.json();
+      setLoading(false)
       console.log(data);
       if (data.insertedId) {
         onClose();
@@ -98,6 +100,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
         </Alert>;
       }
     } catch (error) {
+      setLoading(false)
       console.log(error);
     }
     
@@ -117,6 +120,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
       };
       // console.log(newBloodSugarData)
       try {
+        setLoading(true);
         const response = await fetch(`${baseurl}/addmeasurements`, {
           method: "POST",
           headers: {
@@ -125,6 +129,7 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
           body: JSON.stringify(newMeasurementsData),
         });
         const data = await response.json();
+        setLoading(false)
         console.log(data);
         if (data.acknowledged) {
           onClose();
@@ -151,7 +156,11 @@ const AddDataModal = ({ isOpen, onOpen, onClose }) => {
           });
         }
         // console.log(data)
-      } catch (error) {}
+
+      } catch (error) {
+        setLoading(false)
+        console.log(error)
+      }
     }
   };
   return (

@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 import { Context } from "../provider/DataProvide";
 
 const SignUpPage = () => {
-  const { setUser,setSelectedMenu } = useContext(Context);
+  const { setUser,setSelectedMenu, setLoading } = useContext(Context);
   const navigate = useNavigate();
   const [error, setError] = useState({});
   // const router = useRouter();
@@ -31,6 +31,7 @@ const SignUpPage = () => {
     e.preventDefault();
     setError(null)
     try {
+      setLoading(true);
       if (formData.password === formData.confirmPassword) {
         const newUserData = {
           username: formData.username,
@@ -53,6 +54,7 @@ const SignUpPage = () => {
           }
         );
         const data = await response.json();
+        setLoading(false)
         console.log(data);
         if (response.ok) {
           console.log("first")
@@ -72,6 +74,7 @@ const SignUpPage = () => {
         setError({ message: "Password not matching" });
       }
     } catch (error) {
+      setLoading(false)
       console.error("Error logging in:", error);
       console.log(error.message)
       setError({message:"User already exist"})

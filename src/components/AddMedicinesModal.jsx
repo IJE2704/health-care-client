@@ -22,7 +22,7 @@ import { FaTablets } from "react-icons/fa6";
 import { BiSolidInjection } from "react-icons/bi";
 import Swal from "sweetalert2";
 const AddMedicinesModal = ({ isOpen, onOpen, onClose }) => {
-  const { loggedUser, date, setUpdateMedicines, updateMedicines } = useContext(Context);
+  const { loggedUser, date, setUpdateMedicines, updateMedicines,setLoading } = useContext(Context);
 
   const [medicineType, setMedicineType] = useState("");
   // console.log(loggedUser)
@@ -67,6 +67,7 @@ const AddMedicinesModal = ({ isOpen, onOpen, onClose }) => {
     if (medicineData) {
       console.log('enter')
       try {
+        setLoading(true);
         const response = await fetch(
           "https://healthcare-2fif.onrender.com/addmedicine",
           {
@@ -78,6 +79,7 @@ const AddMedicinesModal = ({ isOpen, onOpen, onClose }) => {
           }
         );
         const data = await response.json();
+        setLoading(false)
         console.log(data);
         if (data.acknowledged) {
           onClose();
@@ -102,6 +104,7 @@ const AddMedicinesModal = ({ isOpen, onOpen, onClose }) => {
           });
         }
       } catch (error) {
+        setLoading(false)
         console.log(error)
       }
     }

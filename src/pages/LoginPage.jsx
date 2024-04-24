@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { Context } from "../provider/DataProvide";
 
 const LoginPage = () => {
-  const { setUser, setSelectedMenu } = useContext(Context);
+  const { setUser, setSelectedMenu, setLoading } = useContext(Context);
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: "",
@@ -20,6 +20,7 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await fetch(
         "https://healthcare-2fif.onrender.com/login",
         {
@@ -31,6 +32,7 @@ const LoginPage = () => {
         }
       );
       const data = await response.json();
+      setLoading(false)
       if (response.ok) {
         Swal.fire({
           title: "Congratulation!",
@@ -45,6 +47,7 @@ const LoginPage = () => {
         // Handle login failure, show error message, etc.
       }
     } catch (error) {
+      setLoading(false)
       console.error("Error logging in:", error);
     }
   };
