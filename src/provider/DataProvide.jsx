@@ -31,17 +31,20 @@ const DataProvide = ({ children }) => {
   const [nightMedicines, setNightMedicines] = useState([]);
   const [notifications, setNotifications] = useState([]);
   const [bloodInformation,setBloodInformation] = useState({})
+  const [loading,setLoading] = useState(false);
 
   useEffect(() => {
     const endpoint = `notification/${loggedUser.userId}`;
     const fetchNotifications = async () => {
       try {
+        setLoading(true)
         const notificationsData = await fetchData(endpoint);
         const reverseNotification = notificationsData.reverse();
         setNotifications(reverseNotification)
         // console.log(reverseNotification)
-        
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         console.log(error);
       }
     };
@@ -51,6 +54,7 @@ const DataProvide = ({ children }) => {
   useEffect(() => {
     const fetchBloodInformation = async () => {
       try {
+        setLoading(true);
         const endPoint = `blood/information/${loggedUser.userId}`
         const bloodInformationData = await fetchData(endPoint);
         const lastBloodInformationData = bloodInformationData[bloodInformationData.length -1]
@@ -65,9 +69,10 @@ const DataProvide = ({ children }) => {
           measurementsData[measurementsData.length - 1];
         setUserMeasurements(lastMeasurementsData);
         setUserMeasuremnetsData(measurementsData);
-
+        setLoading(false)
        
       } catch (error) {
+        setLoading(false);
         console.error("Error fetching data:", error);
         // Handle error state or alert user
       }
@@ -81,13 +86,16 @@ const DataProvide = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const medicinesResponse = await fetch(
           `${baseurl}/medicine/${loggedUser?.userId}`
         );
         const medicinesData = await medicinesResponse.json();
         // console.log(medicinesData)
         setUserMedicines(medicinesData);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         console.error("Error fetching data:", error);
         // Handle error state or alert user
       }
@@ -101,6 +109,7 @@ const DataProvide = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const appointmentsResponse = await fetch(
           `${baseurl}/appointment/${loggedUser?.userId}`
         );
@@ -129,9 +138,11 @@ const DataProvide = ({ children }) => {
         });
         setUserAppointMents(appointMentsData);
         setCloseAppointment(appointMentsData[0]);
+        setLoading(false)
         // Print sorted data
         // console.log(appointMentsData);
       } catch (error) {
+        setLoading(false)
         console.error("Error fetching data:", error);
         // Handle error state or alert user
       }
@@ -145,6 +156,7 @@ const DataProvide = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const reportsResponse = await fetch(
           `${baseurl}/report/${loggedUser?.userId}`
         );
@@ -152,10 +164,11 @@ const DataProvide = ({ children }) => {
         // console.log(reportsData);
 
         setuserReports(reportsData);
-
+        setLoading(false)
         // Print sorted data
         // console.log(reportsData);
       } catch (error) {
+        setLoading(false);
         console.error("Error fetching data:", error);
         // Handle error state or alert user
       }
@@ -246,7 +259,9 @@ const DataProvide = ({ children }) => {
     setCloseAppointment,
     notifications,
     setNotifications,
-    bloodInformation
+    bloodInformation,
+    setLoading,
+    loading
   };
 
   return <Context.Provider value={info}>{children}</Context.Provider>;

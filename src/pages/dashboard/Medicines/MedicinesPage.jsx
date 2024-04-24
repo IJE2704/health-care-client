@@ -10,11 +10,13 @@ import { removeData } from "../../../constants/removeData";
 import Swal from "sweetalert2";
 import SideButton from "../../../components/SideButton";
 
+
+
 const MedicinesPage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userMedicines, setUserMedicines, loggedUser } = useContext(Context);
   const handleDeleteMedicine = async (id) => {
-    const url = `https://healthcare-2fif.onrender.com/medicine/delete/${id}`;
+    const url = `https://healthcare-2fif.onrender.com/medicine/delete/${id}`
     const data = await removeData(url);
     if (data.deletedCount) {
       Swal.fire({
@@ -44,61 +46,53 @@ const MedicinesPage = () => {
 
   // console.log(userMedicines)
   return (
-    <div>
-      {userMedicines ? (
-        <div className="grid grid-cols-12 gap-2 h-full w-full">
-          <div className="mt-7 space-y-4 col-span-12 mr-2">
-            <div className="grid grid-cols-9">
-              <div className="col-span-1 flex justify-center items-center">
-                <p className="font-bold text-lg">Type</p>
-              </div>
-              <div className="col-span-2 flex justify-center items-center">
-                <p className="font-bold text-lg">Name</p>
-              </div>
-              <div className="col-span-2 flex justify-center items-center">
-                <p className="font-bold text-lg">Time</p>
-              </div>
-              <div className="col-span-1 flex justify-center items-center">
-                <p className="font-bold text-lg">Meal</p>
-              </div>
-              <div className="col-span-2 flex justify-center items-center">
-                <p className="font-bold text-lg">Date</p>
-              </div>
-            </div>
-            {userMedicines ? (
-              userMedicines?.map((medicine) => (
-                <MedicinesCart
-                  key={medicine._id}
-                  medicine={medicine}
-                  handleDeleteMedicine={handleDeleteMedicine}
-                ></MedicinesCart>
-              ))
-            ) : (
-              <p>No data</p>
-            )}
+    <div className="grid grid-cols-12 gap-2 h-full w-full">
+      <div className="mt-7 space-y-4 col-span-12 mr-2">
+        <div className="grid grid-cols-9">
+          <div className="col-span-1 flex justify-center items-center">
+            <p className="font-bold text-lg">Type</p>
           </div>
-          <div className=" w-[40px] hover:w-[100px] bottom-[10%]  right-0 fixed">
-            <div
-              onClick={onOpen}
-              className="  flex w-full justify-center items-end mb-4 mt-8"
-            >
-              <button className=" side-btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full  font-semibold hover:scale-105 ">
-                <p className="hidden hover:block">Add</p> <IoMdAdd></IoMdAdd>
-              </button>
-            </div>
+          <div className="col-span-2 flex justify-center items-center">
+            <p className="font-bold text-lg">Name</p>
           </div>
-          {/* <SideButton></SideButton> */}
-          <AddMedicinesModal
-            isOpen={isOpen}
-            onOpen={onOpen}
-            onClose={onClose}
-          ></AddMedicinesModal>
+          <div className="col-span-2 flex justify-center items-center">
+            <p className="font-bold text-lg">Time</p>
+          </div>
+          <div className="col-span-1 flex justify-center items-center">
+            <p className="font-bold text-lg">Meal</p>
+          </div>
+          <div className="col-span-2 flex justify-center items-center">
+            <p className="font-bold text-lg">Date</p>
+          </div>
         </div>
-      ) : (
-        <div>
-          <p>Loading</p>
+        {userMedicines ? (
+          userMedicines?.map((medicine) => (
+            <MedicinesCart
+              key={medicine._id}
+              medicine={medicine}
+              handleDeleteMedicine={handleDeleteMedicine}
+            ></MedicinesCart>
+          ))
+        ) : (
+          <p>No data</p>
+        )}
+      </div>
+      <div className=" w-[40px] hover:w-[100px] bottom-[10%]  right-0 fixed">
+        <div
+          onClick={onOpen}
+          className="  flex w-full justify-center items-end mb-4 mt-8"
+        >
+          <button className=" side-btn flex justify-center items-center gap-3 px-2 text-black py-3 w-full  font-semibold hover:scale-105 ">
+            <p className="hidden hover:block">Add</p> <IoMdAdd></IoMdAdd>
+          </button>
         </div>
-      )}
+      </div>
+      {/* <SideButton></SideButton> */}
+      <AddMedicinesModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+      ></AddMedicinesModal>
     </div>
   );
 };

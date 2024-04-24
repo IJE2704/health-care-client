@@ -43,10 +43,7 @@ const AppointmentsPage = () => {
   };
 
   return (
-    <div>
-      {
-        userAppointments ? (
-          <div className="grid grid-cols-12 gap-2 h-full w-full">
+    <div className="grid grid-cols-12 gap-2 h-full w-full">
       <div className="col-span-12 mr-2 mt-7 space-y-4 ">
         <div className="grid grid-cols-5">
           <div className="col-span-1 flex justify-center items-center">
@@ -115,11 +112,6 @@ const AppointmentsPage = () => {
         onOpen={onOpen}
         onClose={onClose}
       ></AddAppointMentsModal>
-    </div>
-        ):(<div>
-          <p>Loading....</p>
-        </div>)
-      }
     </div>
   );
 };
