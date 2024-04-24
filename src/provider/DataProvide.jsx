@@ -5,7 +5,6 @@ import { fetchData } from "../constants/fetchData";
 import { baseurl } from "../constants/baseUrl";
 export const Context = createContext();
 
-
 const DataProvide = ({ children }) => {
   const [selectedMenu, setMenu] = useState("");
   const [loggedUser, setLoggedUser] = useState({});
@@ -30,38 +29,41 @@ const DataProvide = ({ children }) => {
   const [noonMedicines, setNoonMedicines] = useState([]);
   const [nightMedicines, setNightMedicines] = useState([]);
   const [notifications, setNotifications] = useState([]);
-  const [bloodInformation,setBloodInformation] = useState({})
-  const [loading,setLoading] = useState(false);
+  const [bloodInformation, setBloodInformation] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const endpoint = `notification/${loggedUser.userId}`;
-    const fetchNotifications = async () => {
-      try {
-        setLoading(true)
-        const notificationsData = await fetchData(endpoint);
-        const reverseNotification = notificationsData.reverse();
-        setNotifications(reverseNotification)
-        // console.log(reverseNotification)
-        setLoading(false)
-      } catch (error) {
-        setLoading(false)
-        console.log(error);
-      }
-    };
-    fetchNotifications();
-  }, [loggedUser,update]);
+    if (loggedUser?.userId) {
+      const endpoint = `notification/${loggedUser.userId}`;
+      const fetchNotifications = async () => {
+        try {
+          setLoading(true);
+          const notificationsData = await fetchData(endpoint);
+          const reverseNotification = notificationsData.reverse();
+          setNotifications(reverseNotification);
+          // console.log(reverseNotification)
+          setLoading(false);
+        } catch (error) {
+          setLoading(false);
+          console.log(error);
+        }
+      };
+      fetchNotifications();
+    }
+  }, [loggedUser, update]);
 
   useEffect(() => {
     const fetchBloodInformation = async () => {
       try {
         setLoading(true);
-        const endPoint = `blood/information/${loggedUser.userId}`
+        const endPoint = `blood/information/${loggedUser.userId}`;
         const bloodInformationData = await fetchData(endPoint);
-        const lastBloodInformationData = bloodInformationData[bloodInformationData.length -1]
+        const lastBloodInformationData =
+          bloodInformationData[bloodInformationData.length - 1];
         // console.log(lastBloodInformationData)
-        setBloodInformation(lastBloodInformationData)
+        setBloodInformation(lastBloodInformationData);
         // console.log(bloodInformationData)
-         const measurementsResponse = await fetch(
+        const measurementsResponse = await fetch(
           `${baseurl}/measurements/${loggedUser?.userId}`
         );
         const measurementsData = await measurementsResponse.json();
@@ -69,8 +71,7 @@ const DataProvide = ({ children }) => {
           measurementsData[measurementsData.length - 1];
         setUserMeasurements(lastMeasurementsData);
         setUserMeasuremnetsData(measurementsData);
-        setLoading(false)
-       
+        setLoading(false);
       } catch (error) {
         setLoading(false);
         console.error("Error fetching data:", error);
@@ -93,9 +94,9 @@ const DataProvide = ({ children }) => {
         const medicinesData = await medicinesResponse.json();
         // console.log(medicinesData)
         setUserMedicines(medicinesData);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         console.error("Error fetching data:", error);
         // Handle error state or alert user
       }
@@ -138,11 +139,11 @@ const DataProvide = ({ children }) => {
         });
         setUserAppointMents(appointMentsData);
         setCloseAppointment(appointMentsData[0]);
-        setLoading(false)
+        setLoading(false);
         // Print sorted data
         // console.log(appointMentsData);
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         console.error("Error fetching data:", error);
         // Handle error state or alert user
       }
@@ -164,7 +165,7 @@ const DataProvide = ({ children }) => {
         // console.log(reportsData);
 
         setuserReports(reportsData);
-        setLoading(false)
+        setLoading(false);
         // Print sorted data
         // console.log(reportsData);
       } catch (error) {
@@ -261,7 +262,7 @@ const DataProvide = ({ children }) => {
     setNotifications,
     bloodInformation,
     setLoading,
-    loading
+    loading,
   };
 
   return <Context.Provider value={info}>{children}</Context.Provider>;
